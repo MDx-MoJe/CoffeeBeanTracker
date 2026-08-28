@@ -9,11 +9,19 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface DeductRecordDao {
 
-    @Query("SELECT * FROM deduct_records ORDER BY createdAt DESC LIMIT 99")
+    @Query("SELECT * FROM deduct_records WHERE brewType != 'ROAST' ORDER BY createdAt DESC")
     fun getAllLatest(): Flow<List<DeductRecord>>
+
+    /** 做一杯历史（含 ROAST，供导出/对账用） */
+    @Query("SELECT * FROM deduct_records ORDER BY createdAt DESC")
+    fun getAllIncludingRoast(): Flow<List<DeductRecord>>
 
     @Query("SELECT COUNT(*) FROM deduct_records")
     suspend fun getCount(): Int
+
+    /** 备份用：全量快照（不受 LIMIT 限制） */
+    @Query("SELECT * FROM deduct_records ORDER BY createdAt ASC")
+    suspend fun getAllOnce(): List<DeductRecord>
 
     @Insert
     suspend fun insert(record: DeductRecord): Long

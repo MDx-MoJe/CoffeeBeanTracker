@@ -1,5 +1,6 @@
 package com.coffee.beantracker.data
 
+import kotlinx.serialization.Serializable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
@@ -12,6 +13,7 @@ enum class RoastLevel(val displayName: String) {
 }
 
 @Entity(tableName = "coffee_beans")
+@Serializable
 data class CoffeeBean(
     @PrimaryKey(autoGenerate = true) val id: Long = 0,
     val name: String,

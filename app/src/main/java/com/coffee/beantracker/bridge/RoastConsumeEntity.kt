@@ -1,5 +1,6 @@
 package com.coffee.beantracker.bridge
 
+import kotlinx.serialization.Serializable
 import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
@@ -11,6 +12,7 @@ import androidx.room.PrimaryKey
     tableName = "roast_consumes",
     indices = [Index(value = ["roastId"], unique = true)]
 )
+@Serializable
 data class RoastConsumeEntity(
     @PrimaryKey(autoGenerate = true) val id: Long = 0,
     val roastId: String,
