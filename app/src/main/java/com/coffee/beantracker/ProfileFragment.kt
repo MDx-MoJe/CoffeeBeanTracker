@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.launch
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.coffee.beantracker.databinding.FragmentProfileBinding
 import com.coffee.beantracker.theme.AppTheme
@@ -45,6 +47,64 @@ class ProfileFragment : Fragment() {
         }
         binding.tvVersion.text = " " + getVersionNameSafe()
         binding.tvAuthor.text = " " + getString(R.string.author_text)
+
+        // ===== 数据备份/恢复（zip 直写 Download，导入兼容 zip/json）=====
+        binding.btnBackupExport.setOnClickListener {
+            lifecycleScope.launch {
+                try {
+                    val json = com.coffee.beantracker.utils.BackupManager.exportAll(requireContext())
+                    val zip = com.coffee.beantracker.utils.BackupManager.packZip(json)
+                    val name = com.coffee.beantracker.utils.BackupManager.suggestedFileName()
+                    val where = com.coffee.beantracker.utils.BackupManager.saveToDownloads(requireContext(), name, zip)
+                    showBackupStatus(if (where != null) "✅ 已保存到 $where" else "❌ 保存失败")
+                } catch (e: Exception) {
+                    showBackupStatus("❌ 导出失败：${e.message?.take(40)}")
+                }
+            }
+        }
+        binding.btnBackupImport.setOnClickListener {
+            importLauncher.launch(arrayOf("application/zip", "application/json", "application/octet-stream", "*/*"))
+        }
+
+        // 支持开发者与姐妹应用
+        binding.cvSupportDev.setOnClickListener {
+            runCatching {
+                startActivity(Intent(Intent.ACTION_VIEW, android.net.Uri.parse("https://afdian.com/a/RoastCurve")))
+            }
+        }
+        binding.tvSisterApp.setOnClickListener {
+            runCatching {
+                startActivity(Intent(Intent.ACTION_VIEW, android.net.Uri.parse("https://github.com/MDx-MoJe/RoastCurve")))
+            }
+        }
+    }
+
+    private lateinit var importLauncher: androidx.activity.result.ActivityResultLauncher<Array<String>>
+
+    private fun confirmImport(uri: android.net.Uri) {
+        MaterialAlertDialogBuilder(requireContext(), R.style.ThemeOverlay_CoffeeBean_Dialog)
+            .setTitle("确认导入？")
+            .setMessage("将按 ID 合并备份中的数据（已有 ID 覆盖、新 ID 插入），不删除现有数据。")
+            .setPositiveButton(R.string.yes) { _, _ ->
+                lifecycleScope.launch {
+                    val r = com.coffee.beantracker.utils.BackupManager.importFrom(requireContext(), uri)
+                    r.fold(
+                        onSuccess = { (b, g, ded) ->
+                            showBackupStatus("✅ 导入完成：熟豆 $b / 生豆 $g / 流水 $ded")
+                        },
+                        onFailure = {
+                            showBackupStatus("❌ 导入失败：${com.coffee.beantracker.utils.BackupManager.friendlyError(it)}")
+                        },
+                    )
+                }
+            }
+            .setNegativeButton(R.string.no, null)
+            .show()
+    }
+
+    private fun showBackupStatus(msg: String) {
+        binding.tvBackupStatus.visibility = View.VISIBLE
+        binding.tvBackupStatus.text = msg
     }
 
     override fun onDestroyView() {

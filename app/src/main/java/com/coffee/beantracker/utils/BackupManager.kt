@@ -2,6 +2,9 @@ package com.coffee.beantracker.utils
 
 import android.content.Context
 import android.net.Uri
+import android.os.Build
+import android.os.Environment
+import android.provider.MediaStore
 import androidx.room.withTransaction
 import com.coffee.beantracker.data.CoffeeBean
 import com.coffee.beantracker.data.CoffeeBeanDatabase
@@ -16,17 +19,22 @@ import kotlinx.serialization.json.Json
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+import java.util.zip.ZipEntry
+import java.util.zip.ZipInputStream
+import java.util.zip.ZipOutputStream
 
 /**
- * 数据备份/恢复（纯本地）：
- * - 导出：四张表全量 JSON 写入用户选择的位置（SAF），文件名含日期
- * - 导入：按 ID 合并（已有 ID 覆盖、新 ID 插入），绝不删除现有数据
- * 幂等键表 roast_consumes 也一并备份，保证与烤豆互联的幂等状态不丢失
+ * 数据备份/恢复（纯本地，zip 方案）：
+ * - 导出：四张表全量 JSON 打包 zip，经 MediaStore 直写 Download 目录（Android 10+ 免弹窗）
+ * - 导入：兼容 zip / 裸 json 两种格式；按 ID 合并（已有 ID 覆盖、新 ID 插入），绝不删除现有数据
+ * 幂等键表 roast_consumes 一并备份，保证与烤豆互联的幂等状态不丢失
  */
 object BackupManager {
 
     /** 备份文件格式版本（结构变更时递增） */
     private const val FORMAT_VERSION = 1
+    /** zip 包内 json 的固定文件名 */
+    const val ENTRY_NAME = "beanbag_backup.json"
     private val json = Json { ignoreUnknownKeys = true; encodeDefaults = true }
 
     @Serializable
@@ -54,51 +62,110 @@ object BackupManager {
         json.encodeToString(bundle)
     }
 
-    /** 推荐文件名：beanbag_backup_MMdd-HHmm.json */
+    /** json → zip 字节流 */
+    fun packZip(jsonText: String): ByteArray = try {
+        val bos = java.io.ByteArrayOutputStream()
+        ZipOutputStream(bos).use { zos ->
+            zos.putNextEntry(ZipEntry(ENTRY_NAME))
+            zos.write(jsonText.toByteArray())
+            zos.closeEntry()
+        }
+        bos.toByteArray()
+    } catch (_: Exception) {
+        byteArrayOf()
+    }
+
+    /** 推荐文件名：beanbag_backup_MMdd-HHmm.zip */
     fun suggestedFileName(): String {
         val f = SimpleDateFormat("MMdd-HHmm", Locale.US)
-        return "beanbag_backup_${f.format(Date())}.json"
+        return "beanbag_backup_${f.format(Date())}.zip"
     }
 
     /**
-     * 从 URI 读入备份并按 ID 合并导入。
-     * @return Pair(导入熟豆数, 导入生豆数) 等统计
+     * 直写公共 Download 目录（Android 10+ MediaStore，无弹窗无权限；9 以下落 App 外部分区）。
+     * @return 人读保存位置；null = 失败
      */
-    suspend fun importFrom(context: Context, uri: Uri): Result<Triple<Int, Int, Int>> =
+    fun saveToDownloads(context: Context, filename: String, data: ByteArray): String? {
+        return try {
+        if (Build.VERSION.SDK_INT >= 29) {
+            val values = android.content.ContentValues().apply {
+                put(MediaStore.Downloads.DISPLAY_NAME, filename)
+                put(MediaStore.Downloads.MIME_TYPE, "application/zip")
+            }
+            val uri = context.contentResolver.insert(MediaStore.Downloads.EXTERNAL_CONTENT_URI, values)
+                ?: return null
+            context.contentResolver.openOutputStream(uri)?.use { it.write(data) } ?: return null
+            "Download/$filename"
+        } else {
+            val dir = java.io.File(context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), "").apply { mkdirs() }
+            java.io.File(dir, filename).writeBytes(data)
+            "App外部分区/$filename"
+        }
+        } catch (_: Exception) {
+            null
+        }
+    }
+
+    /** zip 字节流 → json 文本；输入若是裸 json（PK 魔数判断）则原样返回 */
+    fun unpackZip(data: ByteArray): String? = try {
+        if (data.size >= 4 && data[0] == 'P'.code.toByte() && data[1] == 'K'.code.toByte()) {
+            var text: String? = null
+            ZipInputStream(data.inputStream()).use { zis ->
+                var entry = zis.nextEntry
+                while (entry != null && text == null) {
+                    if (!entry.isDirectory) text = zis.readBytes().decodeToString()
+                    entry = zis.nextEntry
+                }
+            }
+            text
+        } else {
+            data.decodeToString().takeIf { it.trimStart().startsWith("{") }
+        }
+    } catch (_: Exception) {
+        null
+    }
+
+    /** 从 JSON 文本按 ID 合并导入。@return Triple(熟豆数, 生豆数, 流水数) */
+    suspend fun importFrom(context: Context, jsonText: String): Result<Triple<Int, Int, Int>> =
         withContext(Dispatchers.IO) {
             try {
-                val text = context.contentResolver.openInputStream(uri)?.use {
-                    it.bufferedReader().readText()
-                } ?: return@withContext Result.failure(IllegalStateException("无法读取文件"))
-
-                val bundle = json.decodeFromString<BackupBundle>(text)
-
-                // 格式版本校验（向下兼容：只接受 <= 当前版本的文件）
+                val bundle = json.decodeFromString<BackupBundle>(jsonText)
                 if (bundle.formatVersion > FORMAT_VERSION) {
                     return@withContext Result.failure(
                         IllegalStateException("备份文件版本过新（${bundle.formatVersion} > $FORMAT_VERSION），请先升级 App")
                     )
                 }
-
                 val db = CoffeeBeanDatabase.getDatabase(context)
                 var nBean = 0; var nGreen = 0; var nDeduct = 0
                 db.withTransaction {
-                    bundle.coffeeBeans.forEach {
-                        db.coffeeBeanDao().insertBean(it); nBean++
-                    }
-                    bundle.greenBeans.forEach {
-                        db.greenBeanDao().insert(it); nGreen++
-                    }
-                    bundle.deductRecords.forEach {
-                        db.deductRecordDao().insert(it); nDeduct++
-                    }
-                    bundle.roastConsumes.forEach {
-                        db.roastConsumeDao().insert(it)
-                    }
+                    bundle.coffeeBeans.forEach { db.coffeeBeanDao().insertBean(it); nBean++ }
+                    bundle.greenBeans.forEach { db.greenBeanDao().insert(it); nGreen++ }
+                    bundle.deductRecords.forEach { db.deductRecordDao().insert(it); nDeduct++ }
+                    bundle.roastConsumes.forEach { db.roastConsumeDao().insert(it) }
                 }
                 Result.success(Triple(nBean, nGreen, nDeduct))
             } catch (e: Exception) {
                 Result.failure(e)
             }
         }
+
+    /** SAF URI 读入（zip/json 自适应）并导入 */
+    suspend fun importFrom(context: Context, uri: Uri): Result<Triple<Int, Int, Int>> =
+        withContext(Dispatchers.IO) {
+            try {
+                val raw = context.contentResolver.openInputStream(uri)?.use { it.readBytes() }
+                    ?: return@withContext Result.failure(IllegalStateException("无法读取文件"))
+                val text = unpackZip(raw)
+                    ?: return@withContext Result.failure(IllegalStateException("文件格式无法识别（需要 beanbag zip 或 json）"))
+                importFrom(context, text)
+            } catch (e: Exception) {
+                Result.failure(e)
+            }
+        }
+
+    /** 导入前的友好错误提示（避免暴露序列化细节） */
+    fun friendlyError(e: Throwable): String = when {
+        e.message?.contains("version") == true -> e.message ?: "版本不兼容"
+        else -> "文件内容不是有效的豆袋备份"
+    }
 }
