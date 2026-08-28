@@ -185,9 +185,10 @@ class HomeFragment : Fragment() {
     }
 
     private fun setupViewModel() {
+        binding.emptyTextView.visibility = View.GONE   // 先归零，等 LiveData 首回调统一决定，避免首帧闪烁重影
         viewModel.allBeans.observe(viewLifecycleOwner) { list ->
             adapter.submitList(list)
-            binding.emptyTextView.visibility = if (list.isEmpty()) View.VISIBLE else View.GONE
+            binding.emptyTextView.visibility = if (!isGreenTab && list.isEmpty()) View.VISIBLE else View.GONE
         }
     }
 
@@ -214,9 +215,10 @@ class HomeFragment : Fragment() {
             }
         }
         greenBeanViewModel = ViewModelProvider(this, factory)[GreenBeanViewModel::class.java]
+        binding.greenBeanEmptyView.visibility = View.GONE   // 同上：先归零防闪烁
         greenBeanViewModel.allGreenBeans.observe(viewLifecycleOwner) { list ->
             greenBeanAdapter.submitList(list)
-            binding.greenBeanEmptyView.visibility = if (list.isEmpty()) View.VISIBLE else View.GONE
+            binding.greenBeanEmptyView.visibility = if (isGreenTab && list.isEmpty()) View.VISIBLE else View.GONE
         }
     }
 

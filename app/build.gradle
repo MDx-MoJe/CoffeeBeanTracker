@@ -27,8 +27,8 @@ android {
         applicationId "com.coffee.beantracker"
         minSdk 24
         targetSdk 34
-        versionCode 32
-        versionName "3.0.16"
+        versionCode 36
+        versionName "3.0.20"
     }
 
     buildTypes {
