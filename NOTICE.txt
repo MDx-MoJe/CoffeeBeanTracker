@@ -1,0 +1,49 @@
+豆袋 CoffeeBeanTracker
+Copyright 2026 MDx
+https://github.com/MDx-MoJe/CoffeeBeanTracker
+
+=== English Summary ===
+
+The source code in this repository is licensed under the Apache License 2.0
+(see LICENSE). However, the app name "豆袋 / CoffeeBeanTracker", its logo,
+and the official signing certificate are NOT covered by that license and
+remain the exclusive property of MDx. Any fork or redistribution must rename
+the app and replace the logo; distributing a build under the original name
+or with the original logo is an infringement.
+
+=== 版权与商标声明 ===
+
+一、代码授权
+
+本仓库包含的应用源代码，依据 Apache License 2.0（阿帕奇 2.0 许可证，全文见
+LICENSE 文件）向公众授权。您可以在遵守该许可证的前提下自由使用、学习、
+修改与再分发。
+
+二、许可证不覆盖的内容
+
+依据 Apache License 2.0 第 6 条，该许可证不授予任何商标权、商号权或服务
+标记权。因此，以下内容不在上述授权范围内，其全部权利归 MDx 所有：
+
+1. 应用名称「豆袋 / CoffeeBeanTracker」；
+2. 应用图标（弧线兜豆图形）及其任何形式的 LOGO 变体；
+3. 官方签名证书与发布密钥；
+4. 官方渠道标识与赞助渠道。
+
+三、再分发（Fork / 二次发布）要求
+
+1. 分发基于本项目（修改或未修改）构建的应用时，必须：
+   a. 更换应用名称与图标，不得沿用「豆袋 / CoffeeBeanTracker」名称或原版图标；
+   b. 在应用内设置、关于等显著位置注明原始项目来源与 Apache 2.0 许可证；
+   c. 保留源代码及产物中已有的版权与许可证声明（Apache 2.0 第 4(d) 条）。
+2. 以「豆袋 CoffeeBeanTracker」名义、或携带原版图标进行任何形式的分发、
+   上架、销售，均构成对 MDx 商号权与著作权的侵犯。
+3. 换名换图标后的再分发，仍须遵循 Apache License 2.0 许可证的全部条款。
+
+四、官方渠道
+
+- 项目与源码：https://github.com/MDx-MoJe/CoffeeBeanTracker
+- 姐妹应用「烤豆 RoastCurve」（烘焙曲线监控）：https://github.com/MDx-MoJe/RoastCurve
+- 安装包下载：上述仓库的 Releases 页面
+- 上述渠道之外的任何「豆袋 CoffeeBeanTracker」安装包均非官方发布，请注意甄别。
+
+如有授权、转载或合作需求，请通过 GitHub Issues 联系 MDx。

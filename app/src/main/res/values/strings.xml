@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string name="app_name">豆袋</string>
+<string name="add_bean">添加咖啡豆</string>
+<string name="edit_bean">编辑咖啡豆</string>
+<string name="bean_name">咖啡豆名称</string>
+<string name="roast_date">烘焙日期</string>
+<string name="rest_days">养豆天数</string>
+<string name="best_before_days">最佳赏味期(天)</string>
+<string name="bean_variety">品种</string>
+<string name="process_method">处理方式</string>
+<string name="development_time">烘焙发展</string>
+<string name="dev_time_seconds">%1$d</string>
+<string name="development_time_hint">此项记录以一爆起算发展时间/发展率百分数</string>
+<string name="roast_level">烘焙深度</string>
+<string name="origin">产地</string>
+<string name="flavor_notes">风味描述</string>
+<string name="save">保存</string>
+<string name="cancel">取消</string>
+<string name="delete">删除</string>
+<string name="days">天</string>
+<string name="please_select_date">请选择日期</string>
+<string name="select_roast_level">选择烘焙深度</string>
+<string name="no_beans">还没有添加咖啡豆</string>
+<string name="start_by_adding">点击下方 + 开始添加</string>
+<string name="error_name_required">请填写咖啡豆名称</string>
+<string name="default_rest_days_value">10</string>
+<string name="default_best_before_value">30</string>
+<string name="no_flavor_notes">（暂无风味描述）</string>
+
+<string name="resting_countdown">养豆 %1$d 天</string>
+<string name="ready_until">赏味 %1$d 天</string>
+<string name="expired_countdown">已过期 %1$d 天</string>
+
+<string name="roast_level_short">烘焙深度</string>
+<string name="process_method_short">处理方式</string>
+<string name="origin_short">产地</string>
+<string name="development_time_short">烘焙发展</string>
+<string name="roast_date_short">烘焙日期</string>
+<string name="best_before_short">赏味期限</string>
+
+<string name="confirm_delete">确认删除这包咖啡豆吗？</string>
+<string name="confirm_delete_msg">删除后无法恢复，确定删除吗？</string>
+<string name="yes">是</string>
+<string name="no">否</string>
+
+<string name="settings">设置</string>
+<string name="app_theme">应用主题</string>
+<string name="dark_mode">显示模式</string>
+<string name="history_clear">清空历史记录</string>
+<string name="history_cleared">历史记录已清空</string>
+<string name="history_hint">下拉可选历史填写</string>
+
+<string name="version_name">版本</string>
+<string name="bean_photo">咖啡豆照片</string>
+<string name="background_image">背景图片</string>
+<string name="select_photo">选择照片</string>
+<string name="select_background">选择背景图</string>
+<string name="change_photo">更换照片</string>
+<string name="change_background">更换背景</string>
+<string name="remove_photo">移除照片</string>
+<string name="remove_background">移除背景</string>
+<string name="photo_hint">点击添加咖啡豆照片</string>
+<string name="bg_hint">点击设置卡片背景</string>
+<string name="glass_effect">磨砂玻璃效果</string>
+<string name="flavor_notes_label">风味描述</string>
+
+<string name="stock_grams">库存（克）</string>
+<string name="deduct_grams">每次扣减（克）</string>
+<string name="stock_remaining">剩余</string>
+<string name="stock_grams_unit">克</string>
+<string name="cups_remaining">还可冲</string>
+<string name="cups_unit">杯</string>
+<string name="deduct_one_cup">做一杯</string>
+<string name="stock_empty">库存已空</string>
+<string name="default_deduct_value">18</string>
+<string name="stock_zero">未设置库存</string>
+<string name="cup_count_format">%1$d 杯</string>
+<string name="share_card">分享卡片</string>
+<string name="share_card_title">分享咖啡豆卡片</string>
+<string name="author_label">作者</string>
+<string name="author_text">MDx</string>
+<string name="brew_records">做一杯历史记录</string>
+<string name="brew_records_desc">查看「做一杯」按钮点击记录</string>
+<string name="brew_record_empty">暂无记录</string>
+<string name="brew_record_hint">每点击一次「做一杯」都会记录在这里</string>
+<string name="brew_record_delete_title">删除这条记录？</string>
+<string name="brew_record_delete_msg">删除后将返还扣除的克数到库存，此操作不可恢复。</string>
+<string name="brew_record_deleted">记录已删除</string>
+<string name="brew_record_deleted_refund">记录已删除，已返还 %1$s 克到库存</string>
+<string name="brew_record_format_before">%1$s 克 → %2$s 克（-%3$s 克）</string>
+<string name="pour_over_grams">手冲克数（克）</string>
+<string name="espresso_grams">意式克数（克）</string>
+<string name="default_pour_over_value">15</string>
+<string name="default_espresso_value">18</string>
+<string name="deduct_pour_over">做一杯手冲</string>
+<string name="deduct_espresso">做一杯意式</string>
+<string name="pour_over_short">手冲</string>
+<string name="espresso_short">意式</string>
+<string name="brew_type_pour_over">手冲</string>
+<string name="brew_type_espresso">意式</string>
+<string name="dock_home">主页</string>
+<string name="dock_add">添加</string>
+<string name="dock_profile">我的</string>
+<string name="flavor_rules_title">赏味期计算规则</string>
+<string name="custom_process_hint">请输入自定义处理方式（按回车确认）</string>
+<string name="custom_origin_hint">请输入自定义产地（按回车确认）</string>
+<string name="custom_flavor_hint">请输入自定义风味词（按回车确认）</string>
+<string name="extra_notes">其他备注</string>
+<string name="extra_notes_hint">可手动补充详细风味描述…</string>
+<string name="chip_custom">自定义</string>
+
+<!-- ============ 蓝牙打印 ============ -->
+<string name="print_label">打印标签</string>
+<string name="print_label_desc">发送到已配对的蓝牙标签机</string>
+<string name="printer_choose_title">选择要打印的蓝牙设备</string>
+<string name="printer_not_paired">未发现已配对的标签机</string>
+<string name="printer_not_paired_msg">请先打开手机「设置 → 蓝牙」，搜索并与打印机完成配对（配对 PIN 通常为 0000 或 1234）。\n配对成功后重新点击打印即可。\n设备名通常包含：HPRT / T260 / HM-T</string>
+<string name="printer_connecting">正在连接…</string>
+<string name="printer_sending">发送数据到打印机…</string>
+<string name="printer_done">打印已发送</string>
+<string name="printer_done_copies">打印已发送 (%1$d 份)</string>
+<string name="rest_days_short">养豆时间</string>
+
+<!-- ============ 帮助与教程 ============ -->
+<string name="help_and_tutorial">功能简介</string>
+<string name="help_and_tutorial_sub">了解软件功能与使用建议</string>
+<string name="help_feature_intro">一、主要功能介绍</string>
+
+<string name="help_feature_1_title">咖啡豆档案管理</string>
+<string name="help_feature_1_desc">• 录入与编辑咖啡豆完整信息：包含咖啡豆名称、烘焙深度、处理方式、产地、发展时间、风味描述、烘焙日期等。
+• 支持自定义图片与背景；库存剩余克数支持点击快速修改。
+• 自动计算养豆倒计时、赏味剩余天数，提供过期提醒。</string>
+
+<string name="help_feature_2_title">做一杯扣减</string>
+<string name="help_feature_2_desc">• 支持「做一杯手冲」「做一杯意式」，一键从库存扣减对应克数，默认15g/18g，扣减重量支持自定义。
+• 所有扣减记录自动保存，可在「我的」页面-做一杯历史记录查看完整明细；支持一键清空记录，清空前需要二次确认。</string>
+
+<string name="help_feature_3_title">主题与显示</string>
+<string name="help_feature_3_desc">• 多套主题配色自由切换：日落橙、玫瑰粉、森林绿等。
+• 深色模式三档可选：跟随系统、浅色、深色，沉浸式适配界面。</string>
+
+<string name="help_feature_4_title">蓝牙标签打印</string>
+<string name="help_feature_4_desc">• 兼容58mm ESC/POS协议蓝牙标签机（203dpi，适配50×50mm标签纸）。
+• 可打印内容：咖啡豆名称、烘焙深度、处理方式、产地、发展时间、风味描述、烘焙日期、赏味期限、养豆时间。
+• 使用提示：首次使用，请前往手机系统设置-蓝牙完成打印机配对，常见配对密码：0000 / 1234，配对成功后再执行打印。</string>
+
+<string name="help_usage_tips">二、使用提示</string>
+
+<string name="help_tips_1_title">养豆时间与赏味期说明</string>
+<string name="help_tips_1_desc">• 养豆天数：从烘焙日期开始计算，页面展示「养豆X天」。
+• 赏味期限 = 烘焙日期 + 设置的最佳赏味天数；到期前显示「赏味X天」，过期后红色高亮提示「已过期X天」。</string>
+
+<string name="help_tips_2_title">剩余克数与库存管理</string>
+<string name="help_tips_2_desc">• 卡片上的剩余克数可直接点击，弹出修改弹窗，快速修正库存，适用于开新袋、盘点校准等场景。
+• "还可冲X杯"为按照当前手冲/意式扣减重量做的估算值，仅供参考。</string>
+
+<string name="help_tips_3_title">处理方式、产地、风味：多选与自定义</string>
+<string name="help_tips_3_desc">• 在新增咖啡豆页面，产地、处理方式支持多选，包含系统预设选项，也可以回车添加自定义条目。
+• 保存按钮为浅草绿色；名称、烘焙日期为必填项，填写完成保存按钮才可点击。</string>
+
+<string name="help_tips_4_title">做一杯历史记录</string>
+<string name="help_tips_4_desc">• 每一次「做一杯手冲/意式」都会留存记录，包含操作时间、扣减重量、库存前后变化。
+• 在我的页面-做一杯历史记录，支持单条删除；也可以一键清空全部记录，清空会二次确认，删除记录不可恢复。</string>
+
+<!-- ============ 隐私政策 ============ -->
+<string name="privacy_policy">隐私政策</string>
+<string name="privacy_policy_sub">了解我们如何保护您的信息</string>
+<string name="privacy_title">隐私政策（咖啡豆烘焙记录管理App）</string>
+<string name="privacy_effective_date">生效日期：2026-08-14</string>
+<string name="privacy_intro">欢迎使用本App。本应用为纯本地离线工具，用于咖啡豆烘焙信息记录、管理，支持蓝牙连接通用协议蓝牙标签打印机打印烘焙标签。
+使用本应用即表示您阅读并同意本隐私政策全部条款；若不同意，请停止使用本应用。</string>
+<string name="privacy_section_1_title">一、信息收集声明</string>
+<string name="privacy_section_1_content">本App不会收集、上传、对外共享任何用户个人信息。
+1. 无需注册账号、无需登录，不要求填写手机号、邮箱、身份证等身份信息。
+2. App无网络访问能力，不会访问互联网、不连接任何云端服务器，不存在把数据上传到外部服务器的行为。
+3. 不集成统计、埋点、广告、崩溃上报类第三方SDK，不会对外上报任何数据。</string>
+<string name="privacy_section_2_title">二、本地数据存储</string>
+<string name="privacy_section_2_content">您在App内录入的全部烘焙记录、豆种信息、烘焙曲线参数、标签模板等所有数据，仅保存在您手机本地存储中，仅您本人可以访问。
+- 数据不会自动同步到任何网络；备份、导出操作由您手动执行。
+- 卸载App，本地数据库会随应用一同清除，请您自行做好重要数据备份。</string>
+<string name="privacy_section_3_title">三、申请的系统权限说明</string>
+<string name="privacy_section_3_content">本App仅申请实现功能所必须的最小权限，不会申请无关权限。
+1. 蓝牙（BLE低功耗蓝牙）权限
+仅用于搜索、连接蓝牙打印机，完成烘焙标签打印。
+蓝牙扫描、连接过程产生的设备信息仅在手机本地内存临时处理，不会保存、不会上传到外部。
+拒绝蓝牙权限，则打印标签功能不可用，其余本地记录功能依旧可以正常使用。
+2. 本地存储权限
+用于保存烘焙记录数据库，以及您手动导出CSV记录文件；仅App自身访问，不会读取手机其他文件夹无关文件。
+本App不请求相机、位置、通讯录、麦克风等非必要权限。</string>
+<string name="privacy_section_4_title">四、第三方服务</string>
+<string name="privacy_section_4_content">本App不使用任何第三方服务。
+仅完成本地蓝牙通信，无数据上报行为。</string>
+<string name="privacy_section_5_title">五、未成年人使用</string>
+<string name="privacy_section_5_content">未成年人使用本App，需要监护人阅读本隐私政策并同意。</string>
+<string name="privacy_section_6_title">六、隐私政策更新</string>
+<string name="privacy_section_6_content">本App为离线工具，如后续功能发生变更会更新本隐私政策。</string>
+<string name="privacy_section_7_title">七、联系</string>
+<string name="privacy_section_7_content">本软件为个人爱好者开发工具，如有疑问，可通过项目开源页面留言联系。</string>
+
+<!-- ============ 生豆管理 ============ -->
+<string name="green_bean_tab">生豆管理</string>
+<string name="roasted_bean_tab">熟豆管理</string>
+<string name="add_green_bean">添加生豆</string>
+<string name="edit_green_bean">编辑生豆</string>
+<string name="green_bean_name">生豆名称</string>
+<string name="purchase_date">购买日期</string>
+<string name="purchase_grams">购买克重</string>
+<string name="remaining_grams">剩余克重</string>
+<string name="no_green_beans">还没有添加生豆</string>
+<string name="green_bean_name_required">请填写生豆名称</string>
+<string name="altitude">海拔</string>
+<string name="grade">等级/品质</string>
+<string name="harvest_year">采收年份</string>
+
+    <string name="consent_title">欢迎使用豆袋</string>
+    <string name="consent_accept">同意并继续</string>
+    <string name="consent_decline">不同意</string>
+    <string name="consent_confirm_title">提示</string>
+    <string name="consent_confirm_message">需要同意《隐私政策》才能使用本应用。确定退出吗？</string>
+    <string name="consent_exit">退出应用</string>
+    <string name="consent_recheck">再看看</string>
+    <!-- 互联桥接权限说明（permission description 要求资源引用） -->
+    <string name="bridge_perm_label">烤豆互联桥接</string>
+    <string name="bridge_perm_desc">允许烤豆应用在烘焙出豆后同步扣减生豆库存</string>
+</resources>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 纯净白主题（默认） -->
+    <color name="t_white_primary">#FFFFFF</color>
+    <color name="t_white_primary_dark">#E2E4E8</color>
+    <color name="t_white_accent">#9CCC65</color>
+
+    <!-- 深色模式下的主色（用于白色主题的深色适配） -->
+    <color name="t_dark_primary">#1C1E21</color>
+    <color name="t_dark_primary_dark">#121417</color>
+    <color name="t_dark_accent">#9CCC65</color>
+
+    <!-- 6 主题基础颜色 -->
+    <color name="t_coffee_primary">#6D4C41</color>
+    <color name="t_coffee_primary_dark">#3E2723</color>
+    <color name="t_coffee_accent">#FFB74D</color>
+
+    <color name="t_forest_primary">#2E7D32</color>
+    <color name="t_forest_primary_dark">#1B5E20</color>
+    <color name="t_forest_accent">#AED581</color>
+
+    <color name="t_ocean_primary">#1565C0</color>
+    <color name="t_ocean_primary_dark">#0D47A1</color>
+    <color name="t_ocean_accent">#64B5F6</color>
+
+    <color name="t_sunset_primary">#E64A19</color>
+    <color name="t_sunset_primary_dark">#BF360C</color>
+    <color name="t_sunset_accent">#FFAB91</color>
+
+    <color name="t_rose_primary">#C2185B</color>
+    <color name="t_rose_primary_dark">#880E4F</color>
+    <color name="t_rose_accent">#F48FB1</color>
+
+    <color name="t_lavender_primary">#5E35B1</color>
+    <color name="t_lavender_primary_dark">#311B92</color>
+    <color name="t_lavender_accent">#B39DDB</color>
+
+    <!-- 兼容旧名称 -->
+    <color name="coffee_brown">#6D4C41</color>
+    <color name="coffee_dark">#3E2723</color>
+    <color name="coffee_light">#A1887F</color>
+    <color name="coffee_accent">#FFB74D</color>
+
+    <!-- 背景：亮色/深色通用 -->
+    <color name="cream">#FFF8E1</color>
+    <color name="bg_light">#F6F7F9</color>
+    <color name="bg_dark">#101010</color>
+    <color name="surface_light">#FFFFFF</color>
+    <color name="surface_dark">#1D1D1D</color>
+
+    <!-- 文本：亮色模式 -->
+    <color name="text_primary_light">#0F1115</color>
+    <color name="text_secondary_light">#4A5059</color>
+    <color name="text_hint_light">#8A8F98</color>
+    <!-- 文本：深色模式 -->
+    <color name="text_primary_dark">#F8F8F8</color>
+    <color name="text_secondary_dark">#C9CDD2</color>
+    <color name="text_hint_dark">#7F848B</color>
+
+    <!-- 状态色 -->
+    <color name="status_not_ready">#EF6C00</color>
+    <color name="status_ready">#2E7D32</color>
+    <color name="status_expired">#C62828</color>
+    <!-- 旧状态名兼容 -->
+    <color name="status_resting">#2E7D32</color>
+    <color name="status_best">#EF6C00</color>
+
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="gray_light">#F5F5F5</color>
+    <color name="gray_medium">#BDBDBD</color>
+    <color name="gray_dark">#757575</color>
+
+    <!-- 通用卡片分割线 -->
+    <color name="divider_light">#E4E7EB</color>
+    <color name="divider_dark">#36383C</color>
+    <color name="card_stroke_light">#D4D7DB</color>
+    <color name="card_stroke_dark">#3C3F44</color>
+
+    <!-- Toast 草绿色胶囊 -->
+    <color name="toast_bg">#9CCC65</color>
+    <color name="toast_bg_dark">#7CB342</color>
+    <color name="toast_text">#FFFFFF</color>
+
+    <!-- 新卡片样式：暖米白 UI（参照目标图） -->
+    <color name="card_bg_warm">#F4EFE9</color>
+    <color name="panel_bg_light">#FBF8F4</color>
+    <color name="panel_stroke_light">#EAE2D8</color>
+    <color name="badge_pour_over">#C87A2D</color>
+    <color name="badge_espresso">#9A4A42</color>
+    <color name="btn_pour_over_solid">#364E30</color>
+    <color name="btn_espresso_light">#EBE1D3</color>
+    <color name="btn_espresso_stroke">#D8CBB9</color>
+    <color name="title_text_warm">#3B2F26</color>
+    <color name="sub_text_warm">#8A7A6B</color>
+
+    <!-- dock 栏：暖米色系 -->
+    <color name="dock_warm_bg">#B3F4EFE9</color>
+    <color name="dock_pill_selected_bg">#6D4C41</color>
+    <color name="dock_add_bg">#CC364E30</color>
+    <color name="dock_selected_fg">#FBF8F4</color>
+    <color name="dock_stroke_coffee">#5C4033</color>
+</resources>

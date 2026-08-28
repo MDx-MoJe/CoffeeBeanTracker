@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/android:windowBackground">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:title="@string/app_name"
+                app:titleTextColor="@color/white"
+                app:popupTheme="@style/ThemeOverlay.MaterialComponents.Light" />
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fragmentContainer"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <!-- Dock Bar: frosted glass pill bar, no separate blur layer -->
+    <FrameLayout
+        android:id="@+id/dockBar"
+        android:layout_width="wrap_content"
+        android:layout_height="55dp"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginBottom="16dp"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="10dp"
+        android:background="@drawable/dock_bar_glass">
+
+        <LinearLayout
+            android:id="@+id/dockContent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <FrameLayout
+                android:id="@+id/dockHome"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="12dp">
+
+                <LinearLayout
+                    android:id="@+id/dockHomeContent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:paddingHorizontal="12dp"
+                    android:paddingVertical="6dp"
+                    android:foreground="@drawable/ripple_coffee_pill"
+                    android:background="@drawable/dock_pill_bg">
+
+                    <ImageView
+                        android:id="@+id/ivDockHome"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_home"
+                        app:tint="@color/text_secondary"
+                        android:contentDescription="@string/dock_home" />
+
+                    <TextView
+                        android:id="@+id/tvDockHome"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="@string/dock_home"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        android:includeFontPadding="false"
+                        android:gravity="center"
+                        android:textColor="@color/text_secondary" />
+                </LinearLayout>
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/dockAdd"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp">
+
+                <LinearLayout
+                    android:id="@+id/dockAddContent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="6dp"
+                    android:foreground="@drawable/ripple_white_pill"
+                    android:background="@drawable/dock_add_grass_green_bg">
+
+                    <ImageView
+                        android:id="@+id/ivDockAdd"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_add"
+                        app:tint="@color/white"
+                        android:contentDescription="@string/dock_add" />
+
+                    <TextView
+                        android:id="@+id/tvDockAdd"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="@string/dock_add"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        android:includeFontPadding="false"
+                        android:gravity="center"
+                        android:textColor="@color/white" />
+                </LinearLayout>
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/dockProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="12dp">
+
+                <LinearLayout
+                    android:id="@+id/dockProfileContent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:paddingHorizontal="12dp"
+                    android:paddingVertical="6dp"
+                    android:foreground="@drawable/ripple_coffee_pill"
+                    android:background="@drawable/dock_pill_bg">
+
+                    <ImageView
+                        android:id="@+id/ivDockProfile"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_profile"
+                        app:tint="@color/text_secondary"
+                        android:contentDescription="@string/dock_profile" />
+
+                    <TextView
+                        android:id="@+id/tvDockProfile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="@string/dock_profile"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        android:includeFontPadding="false"
+                        android:gravity="center"
+                        android:textColor="@color/text_secondary" />
+                </LinearLayout>
+            </FrameLayout>
+        </LinearLayout>
+    </FrameLayout>
+</FrameLayout>

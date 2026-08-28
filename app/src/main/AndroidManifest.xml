@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- ======= 蓝牙打印权限 (HM-T260LR 经典蓝牙 SPP/RFCOMM) ======= -->
+    <uses-permission android:name="android.permission.BLUETOOTH" android:maxSdkVersion="30" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" android:maxSdkVersion="30" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" android:maxSdkVersion="30" />
+    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" android:usesPermissionFlags="neverForLocation" />
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+    <uses-feature android:name="android.hardware.bluetooth" android:required="false" />
+
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="32" />
+
+    <!-- 互联桥接权限：烤豆 (RoastCurve) 跨应用调用生豆库存接口时需持有 -->
+    <permission
+        android:name="com.coffee.beantracker.permission.BRIDGE"
+        android:label="@string/bridge_perm_label"
+        android:description="@string/bridge_perm_desc"
+        android:protectionLevel="normal" />
+    <uses-permission android:name="com.coffee.beantracker.permission.BRIDGE" />
+
+    <application
+        android:name=".BeanApp"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.CoffeeBeanTracker">
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:configChanges="orientation|screenLayout|screenSize|smallestScreenSize|density|uiMode"
+            android:theme="@style/Theme.CoffeeBeanTracker.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".AddEditBeanActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/Theme.CoffeeBeanTracker.NoActionBar" />
+
+        <activity
+            android:name=".AddEditGreenBeanActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/Theme.CoffeeBeanTracker.NoActionBar" />
+
+        <activity
+            android:name=".SettingsActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/Theme.CoffeeBeanTracker.NoActionBar" />
+
+        <activity
+            android:name=".DeductRecordsActivity"
+            android:exported="false"
+            android:parentActivityName=".SettingsActivity"
+            android:theme="@style/Theme.CoffeeBeanTracker.NoActionBar" />
+
+        <activity
+            android:name=".HelpTutorialActivity"
+            android:exported="false"
+            android:parentActivityName=".SettingsActivity"
+            android:theme="@style/Theme.CoffeeBeanTracker.NoActionBar" />
+
+        <activity
+            android:name=".PrivacyPolicyActivity"
+            android:exported="false"
+            android:parentActivityName=".SettingsActivity"
+            android:theme="@style/Theme.CoffeeBeanTracker.NoActionBar" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+        <!-- 生豆库存互联接口（仅供烤豆调用） -->
+        <provider
+            android:name=".bridge.BeanBridgeProvider"
+            android:authorities="com.coffee.beantracker.bridge"
+            android:exported="true"
+            android:readPermission="com.coffee.beantracker.permission.BRIDGE"
+            android:writePermission="com.coffee.beantracker.permission.BRIDGE" />
+    </application>
+
+</manifest>

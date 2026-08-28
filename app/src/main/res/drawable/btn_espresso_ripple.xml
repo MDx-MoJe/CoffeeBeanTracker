@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="#226D4C41">
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/btn_espresso_light" />
+            <stroke android:width="1.2dp" android:color="@color/btn_espresso_stroke" />
+            <corners android:radius="20dp" />
+        </shape>
+    </item>
+</ripple>
