@@ -15,4 +15,8 @@ interface RoastConsumeDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(entity: RoastConsumeEntity): Long
+
+    /** 备份用：全量快照 */
+    @Query("SELECT * FROM roast_consumes")
+    suspend fun getAllOnce(): List<RoastConsumeEntity>
 }

@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'org.jetbrains.kotlin.android'
+apply plugin: 'org.jetbrains.kotlin.plugin.serialization'
 apply plugin: 'com.google.devtools.ksp'
 
 // 签名配置从 keystore.properties 读取（本地文件，不进 git；开源用户用 example 模板自建）
@@ -26,8 +27,8 @@ android {
         applicationId "com.coffee.beantracker"
         minSdk 24
         targetSdk 34
-        versionCode 31
-        versionName "3.0.15"
+        versionCode 32
+        versionName "3.0.16"
     }
 
     buildTypes {
@@ -70,6 +71,8 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.2.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'
     implementation 'androidx.room:room-runtime:2.6.1'
+    implementation 'androidx.room:room-ktx:2.6.1'
+    implementation 'org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.3'
     implementation 'androidx.room:room-ktx:2.6.1'
     ksp 'androidx.room:room-compiler:2.6.1'
     implementation 'androidx.cardview:cardview:1.0.0'

@@ -7,6 +7,8 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.launch
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.coffee.beantracker.data.RoastLevel
 import com.coffee.beantracker.databinding.ActivitySettingsBinding
@@ -20,6 +22,45 @@ import com.google.android.material.card.MaterialCardView
 class SettingsActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySettingsBinding
+
+    private lateinit var backupLauncher: androidx.activity.result.ActivityResultLauncher<String>
+    private lateinit var importLauncher: androidx.activity.result.ActivityResultLauncher<Array<String>>
+
+    private fun doExport(uri: android.net.Uri) {
+        lifecycleScope.launch {
+            try {
+                val json = com.coffee.beantracker.utils.BackupManager.exportAll(this@SettingsActivity)
+                contentResolver.openOutputStream(uri)?.use { it.write(json.toByteArray()) }
+                showBackupStatus("✅ 备份已保存")
+            } catch (e: Exception) {
+                showBackupStatus("❌ 导出失败：${e.message?.take(40)}")
+            }
+        }
+    }
+
+    private fun confirmImport(uri: android.net.Uri) {
+        MaterialAlertDialogBuilder(this, R.style.ThemeOverlay_CoffeeBean_Dialog)
+            .setTitle("确认导入？")
+            .setMessage("将按 ID 合并备份中的数据（已有 ID 覆盖、新 ID 插入），不删除现有数据。")
+            .setPositiveButton(R.string.yes) { _, _ ->
+                lifecycleScope.launch {
+                    val r = com.coffee.beantracker.utils.BackupManager.importFrom(this@SettingsActivity, uri)
+                    r.fold(
+                        onSuccess = { (b, g, ded) ->
+                            showBackupStatus("✅ 导入完成：熟豆 $b / 生豆 $g / 流水 $ded")
+                        },
+                        onFailure = { showBackupStatus("❌ 导入失败：${it.message?.take(40)}") },
+                    )
+                }
+            }
+            .setNegativeButton(R.string.no, null)
+            .show()
+    }
+
+    private fun showBackupStatus(msg: String) {
+        binding.tvBackupStatus.visibility = View.VISIBLE
+        binding.tvBackupStatus.text = msg
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         ThemeManager.applyOnCreate(this)
@@ -60,6 +101,21 @@ class SettingsActivity : AppCompatActivity() {
             runCatching {
                 startActivity(Intent(Intent.ACTION_VIEW, android.net.Uri.parse("https://github.com/MDx-MoJe/RoastCurve")))
             }
+        }
+
+        // ===== 数据备份/恢复 =====
+        backupLauncher = registerForActivityResult(
+            androidx.activity.result.contract.ActivityResultContracts.CreateDocument("application/json")
+        ) { uri -> if (uri != null) doExport(uri) }
+        importLauncher = registerForActivityResult(
+            androidx.activity.result.contract.ActivityResultContracts.OpenDocument()
+        ) { uri -> if (uri != null) confirmImport(uri) }
+
+        binding.btnBackupExport.setOnClickListener {
+            backupLauncher.launch(com.coffee.beantracker.utils.BackupManager.suggestedFileName())
+        }
+        binding.btnBackupImport.setOnClickListener {
+            importLauncher.launch(arrayOf("application/json", "text/plain", "*/*"))
         }
     }
 

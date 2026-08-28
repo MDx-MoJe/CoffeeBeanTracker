@@ -23,9 +23,17 @@ interface CoffeeBeanDao {
     @Query("SELECT * FROM coffee_beans WHERE name = :name LIMIT 1")
     suspend fun getByNameOnce(name: String): CoffeeBean?
 
+    /** 备份用：全量快照 */
+    @Query("SELECT * FROM coffee_beans")
+    suspend fun getAllBeansOnce(): List<CoffeeBean>
+
     /** 只更新库存（豆袋互联：熟豆累加） */
     @Query("UPDATE coffee_beans SET stockGrams = :stockGrams WHERE id = :id")
     suspend fun updateStock(id: Long, stockGrams: Double)
+
+    /** 累加库存并刷新烘焙日期（互联累加时把养豆期基准挪到最新一炉） */
+    @Query("UPDATE coffee_beans SET stockGrams = :stockGrams, roastDate = :roastDate WHERE id = :id")
+    suspend fun updateStockAndRoastDate(id: Long, stockGrams: Double, roastDate: Long)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(bean: CoffeeBean): Long

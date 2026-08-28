@@ -1,5 +1,6 @@
 package com.coffee.beantracker.bridge
 
+import androidx.room.withTransaction
 import android.content.ContentProvider
 import android.content.ContentValues
 import android.content.UriMatcher
@@ -32,6 +33,9 @@ class BeanBridgeProvider : ContentProvider() {
     companion object {
         const val AUTHORITY = "com.coffee.beantracker.bridge"
         val CONTENT_URI: Uri = Uri.parse("content://$AUTHORITY/green_beans")
+
+        /** 调用方白名单：普通级权限谁都能申请，这里再拦一层只放行烤豆 */
+        private val ALLOWED_CALLERS = setOf("com.roastcurve.android")
 
         const val METHOD_CONSUME = "consume"
         /** 熟豆入库：只建熟豆记录，不碰生豆库存（补录场景：生豆已扣过） */
@@ -68,6 +72,9 @@ class BeanBridgeProvider : ContentProvider() {
         uri: Uri, projection: Array<out String>?, selection: String?,
         selectionArgs: Array<out String>?, sortOrder: String?
     ): Cursor? {
+        if (!isAllowedCaller()) {
+            throw SecurityException("调用方未授权：仅烤豆 (RoastCurve) 可访问豆袋互联接口")
+        }
         when (matcher.match(uri)) {
             CODE_GREEN_BEANS -> {
                 val db = CoffeeBeanDatabase.getDatabase(context!!)
@@ -82,7 +89,16 @@ class BeanBridgeProvider : ContentProvider() {
         }
     }
 
+    /** 调用方白名单校验：仅放行烤豆（防其它 App 拿到权限后乱扣账） */
+    private fun isAllowedCaller(): Boolean {
+        val pkg = callingPackage ?: return false
+        return pkg in ALLOWED_CALLERS
+    }
+
     override fun call(method: String, arg: String?, extras: android.os.Bundle?): android.os.Bundle {
+        if (!isAllowedCaller()) {
+            throw SecurityException("调用方未授权：仅烤豆 (RoastCurve) 可访问豆袋互联接口")
+        }
         if (method != METHOD_CONSUME && method != METHOD_ADD_ROASTED) {
             throw IllegalArgumentException("不支持的方法: $method")
         }
@@ -150,25 +166,25 @@ class BeanBridgeProvider : ContentProvider() {
             return Result.failure(IllegalStateException("库存不足：剩 ${bean.remainingGrams}g，需 ${grams}g"))
         }
 
-        // 3) 扣生豆
+        // 3) 扣生豆 + 熟豆入库 + 流水 + 幂等键：事务包裹，中途失败整体回滚，绝不出现半截账
         val stockBefore = bean.remainingGrams
         val stockAfter = stockBefore - grams
-        db.greenBeanDao().updateRemainingGrams(beanId, stockAfter)
-
-        // 4) 熟豆入库：同名累加，不存在则新建（见 addRoastedStock）
-        val roastedMsg = addRoastedStock(db, ex, fallbackName = "${bean.name}（自烘）")
-
-        db.deductRecordDao().insert(
-            DeductRecord(
-                beanId = 0L, // ROAST 流水指向生豆批次，不做熟豆关联
-                beanName = "[烘焙] ${bean.name}",
-                gramsDeducted = grams,
-                stockBefore = stockBefore,
-                stockAfter = stockAfter,
-                brewType = "ROAST",
+        var roastedMsg = ""
+        db.withTransaction {
+            db.greenBeanDao().updateRemainingGrams(beanId, stockAfter)
+            roastedMsg = addRoastedStock(db, ex, fallbackName = "${bean.name}（自烘）")
+            db.deductRecordDao().insert(
+                DeductRecord(
+                    beanId = 0L, // ROAST 流水指向生豆批次，不做熟豆关联
+                    beanName = "[烘焙] ${bean.name}",
+                    gramsDeducted = grams,
+                    stockBefore = stockBefore,
+                    stockAfter = stockAfter,
+                    brewType = "ROAST",
+                )
             )
-        )
-        db.roastConsumeDao().insert(RoastConsumeEntity(roastId = roastId, greenBeanId = beanId))
+            db.roastConsumeDao().insert(RoastConsumeEntity(roastId = roastId, greenBeanId = beanId))
+        }
 
         return Result.success("已扣生豆 ${grams}g（剩 ${stockAfter}g）；$roastedMsg")
     }
@@ -186,10 +202,14 @@ class BeanBridgeProvider : ContentProvider() {
         if (db.roastConsumeDao().existsRoast("roasted-$roastId")) {
             return Result.success("该炉熟豆已入库过，本次幂等跳过")
         }
-        val msg = addRoastedStock(db, ex, fallbackName = "自烘焙豆")
-        db.roastConsumeDao().insert(
-            RoastConsumeEntity(roastId = "roasted-$roastId", greenBeanId = -1L)
-        )
+        // 入库 + 幂等键：事务包裹，中途失败整体回滚
+        var msg = ""
+        db.withTransaction {
+            msg = addRoastedStock(db, ex, fallbackName = "自烘焙豆")
+            db.roastConsumeDao().insert(
+                RoastConsumeEntity(roastId = "roasted-$roastId", greenBeanId = -1L)
+            )
+        }
         return Result.success(msg)
     }
 
@@ -212,7 +232,8 @@ class BeanBridgeProvider : ContentProvider() {
         val existing = db.coffeeBeanDao().getByNameOnce(name)
         if (existing != null) {
             val newStock = existing.stockGrams + roastedGrams
-            db.coffeeBeanDao().updateStock(existing.id, newStock)
+            // 同名累加时刷新烘焙日期到最新一炉：否则新豆子拿旧日期算养豆期会被误判过期
+            db.coffeeBeanDao().updateStockAndRoastDate(existing.id, newStock, roastDate)
             return "熟豆「$name」累加 ${roastedGrams}g，现有 ${newStock}g"
         } else {
             db.coffeeBeanDao().insert(

@@ -1,5 +1,6 @@
 package com.coffee.beantracker.data
 
+import kotlinx.serialization.Serializable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
@@ -7,6 +8,7 @@ import androidx.room.PrimaryKey
  * 「做一杯」扣减操作记录，上限 99 条
  */
 @Entity(tableName = "deduct_records")
+@Serializable
 data class DeductRecord(
     @PrimaryKey(autoGenerate = true) val id: Long = 0,
     val beanId: Long,           // 关联的咖啡豆ID

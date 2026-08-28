@@ -1,5 +1,6 @@
 package com.coffee.beantracker.data
 
+import kotlinx.serialization.Serializable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
@@ -11,6 +12,7 @@ import androidx.room.PrimaryKey
  * 当前阶段先做「生豆库存」的登记与查看，烘焙联动后续升级接入。
  */
 @Entity(tableName = "green_beans")
+@Serializable
 data class GreenBean(
     @PrimaryKey(autoGenerate = true) val id: Long = 0,
     val name: String,                  // 豆名/批次名
