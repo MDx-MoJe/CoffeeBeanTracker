@@ -21,6 +21,11 @@ class ProfileFragment : Fragment() {
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
 
+    // SAF 导入：必须在 Fragment 创建阶段注册（生命周期契约），放 onViewCreated 会 lateinit 未初始化闪退
+    private val importLauncher = registerForActivityResult(
+        androidx.activity.result.contract.ActivityResultContracts.OpenDocument()
+    ) { uri -> if (uri != null) confirmImport(uri) }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -78,8 +83,6 @@ class ProfileFragment : Fragment() {
             }
         }
     }
-
-    private lateinit var importLauncher: androidx.activity.result.ActivityResultLauncher<Array<String>>
 
     private fun confirmImport(uri: android.net.Uri) {
         MaterialAlertDialogBuilder(requireContext(), R.style.ThemeOverlay_CoffeeBean_Dialog)
