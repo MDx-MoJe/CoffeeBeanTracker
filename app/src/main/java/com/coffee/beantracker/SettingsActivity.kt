@@ -48,6 +48,19 @@ class SettingsActivity : AppCompatActivity() {
         }
         binding.tvVersion.text = " " + getVersionNameSafe()
         binding.tvAuthor.text = " " + getString(R.string.author_text)
+
+        // 支持开发者：跳爱发电（与烤豆共用赞助渠道）
+        binding.cvSupportDev.setOnClickListener {
+            runCatching {
+                startActivity(Intent(Intent.ACTION_VIEW, android.net.Uri.parse("https://afdian.com/a/RoastCurve")))
+            }
+        }
+        // 姐妹应用：跳烤豆 GitHub 仓库
+        binding.tvSisterApp.setOnClickListener {
+            runCatching {
+                startActivity(Intent(Intent.ACTION_VIEW, android.net.Uri.parse("https://github.com/MDx-MoJe/RoastCurve")))
+            }
+        }
     }
 
     private fun getVersionNameSafe(): String {
