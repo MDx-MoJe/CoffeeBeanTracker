@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 深色模式：暖米色系适配 -->
+    <color name="card_bg_warm">#23262B</color>
+    <color name="panel_bg_light">#2A2E35</color>
+    <color name="panel_stroke_light">#3A3F47</color>
+    <color name="btn_espresso_light">#3A3E45</color>
+    <color name="btn_espresso_stroke">#4A4F57</color>
+    <color name="title_text_warm">#F0EDE7</color>
+    <color name="sub_text_warm">#A8A39A</color>
+    <color name="dock_warm_bg">#B323262B</color>
+    <color name="dock_stroke_coffee">#8A7A6B</color>
+    <color name="coffee_brown">#C9A287</color>
+</resources>

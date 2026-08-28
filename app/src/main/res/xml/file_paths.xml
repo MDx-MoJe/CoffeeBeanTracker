@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <cache-path name="shared_images" path="shared_images/" />
+    <files-path name="bean_images" path="bean_images/" />
+    <files-path name="bean_backgrounds" path="bean_backgrounds/" />
+</paths>

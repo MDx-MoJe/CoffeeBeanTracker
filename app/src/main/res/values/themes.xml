@@ -1,0 +1,51 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- 主题基础：Material DayNight，主色将在 Activity onCreate 运行时动态设置 -->
+    <style name="Theme.CoffeeBeanTracker" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:windowBackground">@color/window_background</item>
+        <item name="colorSurface">@color/surface_background</item>
+        <item name="colorOnSurface">@color/text_primary</item>
+        <item name="android:textColorPrimary">@color/text_primary</item>
+        <item name="android:textColorSecondary">@color/text_secondary</item>
+        <item name="android:textColorHint">@color/text_hint</item>
+        <item name="colorError">@color/status_expired</item>
+        <item name="colorControlHighlight">?attr/colorPrimaryVariant</item>
+        <item name="materialCalendarTheme">@style/ThemeOverlay.CoffeeBean.MaterialCalendar</item>
+    </style>
+
+    <style name="Theme.CoffeeBeanTracker.NoActionBar" parent="Theme.CoffeeBeanTracker">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <!-- 文本标签样式（加粗，高对比度）-->
+    <style name="FieldLabel" parent="TextAppearance.AppCompat.Subhead">
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="CardBackground">
+        <item name="android:background">@color/surface_background</item>
+    </style>
+
+    <!-- 赏味规则弹窗：24dp 圆角 + 暖米色背景 -->
+    <style name="ShapeAppearance.CoffeeBean.Dialog" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">24dp</item>
+    </style>
+
+    <style name="ThemeOverlay.CoffeeBean.Dialog" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearance.CoffeeBean.Dialog</item>
+        <item name="colorSurface">@color/card_bg_warm</item>
+        <item name="colorOnSurface">@color/title_text_warm</item>
+        <item name="colorPrimary">@color/coffee_brown</item>
+    </style>
+
+    <!-- 日期选择器：与弹窗统一 24dp 圆角 + 暖米色 -->
+    <style name="ThemeOverlay.CoffeeBean.MaterialCalendar" parent="ThemeOverlay.MaterialComponents.MaterialCalendar">
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearance.CoffeeBean.Dialog</item>
+        <item name="colorSurface">@color/card_bg_warm</item>
+        <item name="colorOnSurface">@color/title_text_warm</item>
+        <item name="colorPrimary">@color/coffee_brown</item>
+    </style>
+</resources>

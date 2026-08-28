@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="window_background">@color/bg_light</color>
+    <color name="surface_background">@color/surface_light</color>
+    <color name="text_primary">@color/text_primary_light</color>
+    <color name="text_secondary">@color/text_secondary_light</color>
+    <color name="text_hint">@color/text_hint_light</color>
+    <color name="divider_color">@color/divider_light</color>
+    <color name="card_stroke">@color/divider_light</color>
+    <color name="fab_icon_tint">@color/white</color>
+    <color name="toolbar_title">@color/white</color>
+</resources>
