@@ -1,5 +1,7 @@
 # 贡献指南
 
+[English](CONTRIBUTING_EN.md) | 简体中文
+
 感谢你对豆袋（CoffeeBeanTracker）的关注。这是一个面向咖啡爱好者的开源库存管理应用，欢迎任何形式的贡献。
 
 ## 项目结构

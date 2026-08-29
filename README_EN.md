@@ -21,6 +21,7 @@ RoastCurve (烤豆) → manage curves (monitoring, design, export)
 - **Roast sync**: with RoastCurve installed, each roast automatically deducts green & adds roasted stock (idempotent)
 - **Cupping notes**: flavor tags & scores
 - **Data backup**: one-tap export/import (zip)
+- **Bilingual UI**: switch language in-app (Follow System / 中文 / English), takes effect immediately
 
 100% offline. No ads, no tracking, no accounts.
 
