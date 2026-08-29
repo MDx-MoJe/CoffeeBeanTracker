@@ -57,7 +57,7 @@ CoffeeBeanTracker/
 ```bash
 # Android Debug APK（无需签名配置，开箱即用）
 ./gradlew assembleDebug
-# 产物: app/build/outputs/apk/debug/app-debug.apk
+# 产物: app/build/outputs/apk/debug/CoffeeBeanTracker-v<版本号>.apk
 ```
 
 环境要求：JDK 17+、Android SDK 34。
