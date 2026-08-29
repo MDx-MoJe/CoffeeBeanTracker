@@ -11,7 +11,7 @@ import com.coffee.beantracker.databinding.ActivityPrivacyPolicyBinding
 import com.coffee.beantracker.theme.ThemeManager
 import com.google.android.material.card.MaterialCardView
 
-class PrivacyPolicyActivity : AppCompatActivity() {
+class PrivacyPolicyActivity : BaseActivity() {
 
     private lateinit var binding: ActivityPrivacyPolicyBinding
 

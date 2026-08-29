@@ -347,4 +347,10 @@ This app is for coffee enthusiasts and does not collect any information from chi
 5. Policy Updates
 If future features involve any new data handling, we will update this policy and ask for your consent again via an in-app notice.
 </string>
+    <string name="language">Language</string>
+    <string name="language_follow_system">Follow System</string>
+    <string name="language_zh">中文</string>
+    <string name="language_en">English</string>
+    <string name="language_switch_title">Choose Language</string>
+    <string name="language_switch_hint">Takes effect immediately</string>
 </resources>

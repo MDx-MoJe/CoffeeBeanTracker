@@ -10,7 +10,7 @@ import com.coffee.beantracker.databinding.ActivityHelpTutorialBinding
 import com.coffee.beantracker.theme.ThemeManager
 import com.google.android.material.card.MaterialCardView
 
-class HelpTutorialActivity : AppCompatActivity() {
+class HelpTutorialActivity : BaseActivity() {
 
     private lateinit var binding: ActivityHelpTutorialBinding
 

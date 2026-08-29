@@ -35,7 +35,7 @@ import java.util.Date
 import java.util.Locale
 import java.util.TimeZone
 
-class AddEditBeanActivity : AppCompatActivity() {
+class AddEditBeanActivity : BaseActivity() {
 
     private lateinit var binding: ActivityAddEditBinding
     private var beanId: Long = 0L

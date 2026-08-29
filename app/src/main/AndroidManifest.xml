@@ -53,27 +53,21 @@
             android:theme="@style/Theme.CoffeeBeanTracker.NoActionBar" />
 
         <activity
-            android:name=".SettingsActivity"
+            android:name=".DeductRecordsActivity"
             android:exported="false"
             android:parentActivityName=".MainActivity"
             android:theme="@style/Theme.CoffeeBeanTracker.NoActionBar" />
 
         <activity
-            android:name=".DeductRecordsActivity"
-            android:exported="false"
-            android:parentActivityName=".SettingsActivity"
-            android:theme="@style/Theme.CoffeeBeanTracker.NoActionBar" />
-
-        <activity
             android:name=".HelpTutorialActivity"
             android:exported="false"
-            android:parentActivityName=".SettingsActivity"
+            android:parentActivityName=".MainActivity"
             android:theme="@style/Theme.CoffeeBeanTracker.NoActionBar" />
 
         <activity
             android:name=".PrivacyPolicyActivity"
             android:exported="false"
-            android:parentActivityName=".SettingsActivity"
+            android:parentActivityName=".MainActivity"
             android:theme="@style/Theme.CoffeeBeanTracker.NoActionBar" />
 
         <provider

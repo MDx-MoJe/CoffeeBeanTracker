@@ -8,7 +8,7 @@ import com.coffee.beantracker.databinding.ActivityMainBinding
 import com.coffee.beantracker.theme.ThemeManager
 import com.coffee.beantracker.utils.ConsentManager
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private var homeFragment: HomeFragment? = null

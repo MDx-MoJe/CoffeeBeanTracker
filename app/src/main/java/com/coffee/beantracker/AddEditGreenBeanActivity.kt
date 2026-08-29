@@ -19,7 +19,7 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-class AddEditGreenBeanActivity : AppCompatActivity() {
+class AddEditGreenBeanActivity : BaseActivity() {
 
     private lateinit var binding: ActivityAddEditGreenBeanBinding
     private var beanId: Long = 0L

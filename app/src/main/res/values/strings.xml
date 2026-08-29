@@ -347,4 +347,10 @@
 五、政策更新
 若未来应用引入任何新功能涉及数据处理，我们将更新本政策并通过应用内弹窗重新征求您的同意。
 </string>
+    <string name="language">语言</string>
+    <string name="language_follow_system">跟随系统</string>
+    <string name="language_zh">中文</string>
+    <string name="language_en">English</string>
+    <string name="language_switch_title">选择语言</string>
+    <string name="language_switch_hint">切换语言后立即生效</string>
 </resources>

@@ -19,7 +19,7 @@ import kotlinx.coroutines.withContext
 import com.coffee.beantracker.utils.GramFormatter
 import com.coffee.beantracker.utils.ToastCustom
 
-class DeductRecordsActivity : AppCompatActivity() {
+class DeductRecordsActivity : BaseActivity() {
 
     private lateinit var binding: ActivityDeductRecordsBinding
     private lateinit var db: CoffeeBeanDatabase

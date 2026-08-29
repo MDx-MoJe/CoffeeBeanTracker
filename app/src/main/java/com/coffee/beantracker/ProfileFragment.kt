@@ -13,6 +13,8 @@ import com.coffee.beantracker.databinding.FragmentProfileBinding
 import com.coffee.beantracker.theme.AppTheme
 import com.coffee.beantracker.theme.DarkMode
 import com.coffee.beantracker.theme.ThemeManager
+import com.coffee.beantracker.utils.AppLocale
+import com.coffee.beantracker.utils.LocaleManager
 import com.google.android.material.card.MaterialCardView
 import android.widget.LinearLayout
 
@@ -39,8 +41,10 @@ class ProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         buildThemePreview()
         updateDarkModeText()
+        updateLanguageText()
 
         binding.cvDarkMode.setOnClickListener { showDarkModePicker() }
+        binding.cvLanguage.setOnClickListener { showLanguagePicker() }
         binding.cvBrewRecords.setOnClickListener {
             startActivity(Intent(requireContext(), DeductRecordsActivity::class.java))
         }
@@ -167,6 +171,39 @@ class ProfileFragment : Fragment() {
 
     private fun updateDarkModeText() {
         binding.tvDarkMode.text = ThemeManager.getDarkMode().localizedName(requireContext())
+    }
+
+    private fun updateLanguageText() {
+        binding.tvLanguage.text = LocaleManager.getLocale().displayName
+    }
+
+    private fun showLanguagePicker() {
+        val options = AppLocale.displayList()
+        val current = LocaleManager.getLocale()
+        val labels = options.map { it.second }.toTypedArray()
+        MaterialAlertDialogBuilder(requireContext(), R.style.ThemeOverlay_CoffeeBean_Dialog)
+            .setTitle(R.string.language_switch_title)
+            .setSingleChoiceItems(labels, options.indexOfFirst { it.first == current.id }) { d, which ->
+                val newLocale = AppLocale.fromId(options[which].first)
+                if (newLocale != current) {
+                    LocaleManager.setLocale(newLocale)
+                    d.dismiss()
+                    restartApp()
+                } else {
+                    d.dismiss()
+                }
+            }
+            .show()
+    }
+
+    /** 重启整个 App（清栈回主页），用于语言切换后让所有页面统一刷新 */
+    private fun restartApp() {
+        val intent = Intent(requireContext(), MainActivity::class.java).apply {
+            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+        }
+        startActivity(intent)
+        requireActivity().finishAffinity()
+        requireActivity().overridePendingTransition(0, 0)
     }
 
     private fun showDarkModePicker() {
