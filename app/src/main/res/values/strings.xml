@@ -226,7 +226,7 @@
 
     <!-- 设置页/我的页 数据备份 & 支持开发者 -->
     <string name="backup_title">💾 数据备份</string>
-    <string name="backup_desc">库存、记录全部导出为 JSON 文件。导入按 ID 合并、不删除现有数据。建议每次大变动后备份一次。</string>
+    <string name="backup_desc">库存、记录全部导出为 zip 备份文件（内含 JSON），自动保存到 Download 目录。导入兼容 zip / json，按 ID 合并、不删除现有数据。建议每次大变动后备份一次。</string>
     <string name="backup_export">导出备份</string>
     <string name="backup_import">从文件导入</string>
     <string name="support_dev_title">☕ 支持开发者</string>

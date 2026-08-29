@@ -226,7 +226,7 @@ It only performs local Bluetooth communication and reports no data.</string>
 
     <!-- Settings/Profile: backup & support -->
     <string name="backup_title">💾 Data Backup</string>
-    <string name="backup_desc">Exports all stock and records to a JSON file. Import merges by ID and never deletes existing data. We recommend backing up after major changes.</string>
+    <string name="backup_desc">Exports all stock and records to a zip backup (JSON inside), saved to the Download folder. Import accepts zip / json, merges by ID, never deletes existing data. We recommend backing up after major changes.</string>
     <string name="backup_export">Export Backup</string>
     <string name="backup_import">Import from File</string>
     <string name="support_dev_title">☕ Support the Developer</string>
