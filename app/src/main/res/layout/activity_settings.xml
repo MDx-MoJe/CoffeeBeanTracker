@@ -265,7 +265,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="💾 数据备份"
+                            android:text="@string/backup_title"
                             android:textColor="@color/coffee_brown"
                             android:textSize="15sp"
                             android:textStyle="bold" />
@@ -274,7 +274,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
-                            android:text="库存、记录全部导出为 JSON 文件。导入按 ID 合并、不删除现有数据。建议每次大变动后备份一次。"
+                            android:text="@string/backup_desc"
                             android:textColor="@color/text_secondary"
                             android:textSize="12sp" />
 
@@ -291,7 +291,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:layout_marginEnd="6dp"
-                                android:text="导出备份"
+                                android:text="@string/backup_export"
                                 android:textSize="12sp" />
 
                             <com.google.android.material.button.MaterialButton
@@ -301,7 +301,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:layout_marginStart="6dp"
-                                android:text="从文件导入"
+                                android:text="@string/backup_import"
                                 android:textSize="12sp" />
                         </LinearLayout>
 
@@ -335,7 +335,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="☕ 支持开发者"
+                            android:text="@string/support_dev_title"
                             android:textColor="@color/coffee_brown"
                             android:textSize="15sp"
                             android:textStyle="bold" />
@@ -344,7 +344,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
-                            android:text="豆袋永久免费、开源、无广告。如果你觉得它帮到了你，欢迎到爱发电请我喝杯咖啡。"
+                            android:text="@string/support_dev_desc"
                             android:textColor="@color/text_secondary"
                             android:textSize="12sp" />
                     </LinearLayout>
@@ -357,7 +357,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:padding="6dp"
-                    android:text="🔥 姐妹应用：烤豆 RoastCurve —— 烘焙曲线监控与自动跟随"
+                    android:text="@string/sister_app"
                     android:textColor="@color/text_secondary"
                     android:textSize="12sp" />
             </LinearLayout>

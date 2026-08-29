@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string name="app_name">BeanBag</string>
+<string name="add_bean">Add Coffee Bean</string>
+<string name="edit_bean">Edit Coffee Bean</string>
+<string name="bean_name">Bean Name</string>
+<string name="roast_date">Roast Date</string>
+<string name="rest_days">Rest Days</string>
+<string name="best_before_days">Best Before (Days)</string>
+<string name="bean_variety">Variety</string>
+<string name="process_method">Process Method</string>
+<string name="development_time">Development</string>
+<string name="dev_time_seconds">%1$d</string>
+<string name="development_time_hint">Measured from first crack: development time / development percentage</string>
+<string name="roast_level">Roast Level</string>
+<string name="origin">Origin</string>
+<string name="flavor_notes">Flavor Notes</string>
+<string name="save">Save</string>
+<string name="cancel">Cancel</string>
+<string name="delete">Delete</string>
+<string name="days">days</string>
+<string name="please_select_date">Please select a date</string>
+<string name="select_roast_level">Select Roast Level</string>
+<string name="no_beans">No coffee beans yet</string>
+<string name="start_by_adding">Tap + below to add your first bean</string>
+<string name="error_name_required">Please enter a bean name</string>
+<string name="default_rest_days_value">10</string>
+<string name="default_best_before_value">30</string>
+<string name="no_flavor_notes">(No flavor notes)</string>
+
+<string name="resting_countdown">Resting %1$d days</string>
+<string name="ready_until">Flavor window %1$d days</string>
+<string name="expired_countdown">Expired %1$d days</string>
+
+<string name="roast_level_short">Roast</string>
+<string name="process_method_short">Process</string>
+<string name="origin_short">Origin</string>
+<string name="development_time_short">Dev.</string>
+<string name="roast_date_short">Roasted</string>
+<string name="best_before_short">Best by</string>
+
+<string name="confirm_delete">Delete this bag of beans?</string>
+<string name="confirm_delete_msg">This cannot be undone. Delete anyway?</string>
+<string name="yes">Yes</string>
+<string name="no">No</string>
+
+<string name="settings">Settings</string>
+<string name="app_theme">App Theme</string>
+<string name="dark_mode">Display Mode</string>
+<string name="history_clear">Clear History</string>
+<string name="history_cleared">History cleared</string>
+<string name="history_hint">Pull down to pick from history</string>
+
+<string name="version_name">Version</string>
+<string name="bean_photo">Bean Photo</string>
+<string name="background_image">Background Image</string>
+<string name="select_photo">Choose Photo</string>
+<string name="select_background">Choose Background</string>
+<string name="change_photo">Change Photo</string>
+<string name="change_background">Change Background</string>
+<string name="remove_photo">Remove Photo</string>
+<string name="remove_background">Remove Background</string>
+<string name="photo_hint">Tap to add a bean photo</string>
+<string name="bg_hint">Tap to set a card background</string>
+<string name="glass_effect">Frosted Glass Effect</string>
+<string name="flavor_notes_label">Flavor Notes</string>
+
+<string name="stock_grams">Stock (g)</string>
+<string name="deduct_grams">Per-Brew Amount (g)</string>
+<string name="stock_remaining">Remaining</string>
+<string name="stock_grams_unit">g</string>
+<string name="cups_remaining">Cups left</string>
+<string name="cups_unit">cups</string>
+<string name="deduct_one_cup">Brew One Cup</string>
+<string name="stock_empty">Stock empty</string>
+<string name="default_deduct_value">18</string>
+<string name="stock_zero">No stock set</string>
+<string name="cup_count_format">%1$d cups</string>
+<string name="share_card">Share Card</string>
+<string name="share_card_title">Share Bean Card</string>
+<string name="author_label">Author</string>
+<string name="author_text">MDx</string>
+<string name="brew_records">Brew History</string>
+<string name="brew_records_desc">Records of every "Brew One Cup" tap</string>
+<string name="brew_record_empty">No records yet</string>
+<string name="brew_record_hint">Every "Brew One Cup" tap is recorded here</string>
+<string name="brew_record_delete_title">Delete this record?</string>
+<string name="brew_record_delete_msg">The deducted grams will be returned to stock. This cannot be undone.</string>
+<string name="brew_record_deleted">Record deleted</string>
+<string name="brew_record_deleted_refund">Record deleted, %1$s g returned to stock</string>
+<string name="brew_record_format_before">%1$s g → %2$s g (-%3$s g)</string>
+<string name="pour_over_grams">Pour-Over Amount (g)</string>
+<string name="espresso_grams">Espresso Amount (g)</string>
+<string name="default_pour_over_value">15</string>
+<string name="default_espresso_value">18</string>
+<string name="deduct_pour_over">Brew Pour-Over</string>
+<string name="deduct_espresso">Brew Espresso</string>
+<string name="pour_over_short">Pour-Over</string>
+<string name="espresso_short">Espresso</string>
+<string name="brew_type_pour_over">Pour-Over</string>
+<string name="brew_type_espresso">Espresso</string>
+<string name="dock_home">Home</string>
+<string name="dock_add">Add</string>
+<string name="dock_profile">Profile</string>
+<string name="flavor_rules_title">Flavor Window Rules</string>
+<string name="custom_process_hint">Enter a custom process (Enter to confirm)</string>
+<string name="custom_origin_hint">Enter a custom origin (Enter to confirm)</string>
+<string name="custom_flavor_hint">Enter a custom flavor note (Enter to confirm)</string>
+<string name="extra_notes">Extra Notes</string>
+<string name="extra_notes_hint">Add detailed flavor notes here…</string>
+<string name="chip_custom">Custom</string>
+
+<!-- ============ Bluetooth Printing ============ -->
+<string name="print_label">Print Label</string>
+<string name="print_label_desc">Send to a paired Bluetooth label printer</string>
+<string name="printer_choose_title">Choose a Bluetooth printer</string>
+<string name="printer_not_paired">No paired label printer found</string>
+<string name="printer_not_paired_msg">Open "Settings → Bluetooth" on your phone, search and pair with the printer (PIN is usually 0000 or 1234).\nAfter pairing, tap Print again.\nPrinter names usually contain: HPRT / T260 / HM-T</string>
+<string name="printer_connecting">Connecting…</string>
+<string name="printer_sending">Sending data to printer…</string>
+<string name="printer_done">Print job sent</string>
+<string name="printer_done_copies">Print job sent (%1$d copies)</string>
+<string name="rest_days_short">Rest Time</string>
+
+<!-- ============ Help & Tutorial ============ -->
+<string name="help_and_tutorial">Features</string>
+<string name="help_and_tutorial_sub">Learn about the app and usage tips</string>
+<string name="help_feature_intro">1. Main Features</string>
+
+<string name="help_feature_1_title">Bean Archive Management</string>
+<string name="help_feature_1_desc">• Add and edit full bean info: name, roast level, process method, origin, development time, flavor notes, roast date, and more.
+• Supports custom photos and backgrounds; tap remaining stock to quickly adjust it.
+• Auto-counts the resting countdown and remaining flavor window, with expiry reminders.</string>
+
+<string name="help_feature_2_title">Brew-and-Deduct</string>
+<string name="help_feature_2_desc">• “Brew Pour-Over” / “Brew Espresso” deduct the set amount from stock in one tap; defaults 15 g / 18 g, both customizable.
+• Every deduction is saved automatically; view the full log under Profile → Brew History. Clear all records in one tap, with a confirmation step.</string>
+
+<string name="help_feature_3_title">Themes &amp; Display</string>
+<string name="help_feature_3_desc">• Multiple theme palettes: Sunset Orange, Rose Pink, Forest Green, and more.
+• Dark mode in three levels: Follow System, Light, Dark, with immersive UI adaptation.</string>
+
+<string name="help_feature_4_title">Bluetooth Label Printing</string>
+<string name="help_feature_4_desc">• Compatible with 58 mm ESC/POS Bluetooth label printers (203 dpi, 50×50 mm labels).
+• Prints: bean name, roast level, process method, origin, development time, flavor notes, roast date, best-before, rest time.
+• Tip: pair the printer in your phone\'s system Bluetooth settings first; common PINs: 0000 / 1234.</string>
+
+<string name="help_usage_tips">2. Usage Tips</string>
+
+<string name="help_tips_1_title">Rest Time &amp; Flavor Window</string>
+<string name="help_tips_1_desc">• Rest days count from the roast date; the card shows “Resting X days”.
+• Flavor window = roast date + best-before days; shows “Flavor window X days” before expiry, and a red “Expired X days” highlight after.</string>
+
+<string name="help_tips_2_title">Remaining Stock Management</string>
+<string name="help_tips_2_desc">• Tap the remaining grams on the card to open a quick-edit dialog — handy for opening a new bag or taking inventory.
+• “Cups left” is an estimate based on your current pour-over/espresso amounts, for reference only.</string>
+
+<string name="help_tips_3_title">Process, Origin, Flavor: Multi-Select &amp; Custom</string>
+<string name="help_tips_3_desc">• On the add-bean page, origin and process method support multi-select with presets; press Enter to add custom entries.
+• The save button is light grass green; name and roast date are required before saving.</string>
+
+<string name="help_tips_4_title">Brew History</string>
+<string name="help_tips_4_desc">• Every “Brew Pour-Over/Espresso” is logged with time, deducted amount, and stock before/after.
+• Under Profile → Brew History, delete single records or clear all at once (double confirmation; deletions cannot be undone).</string>
+
+<!-- ============ Privacy Policy ============ -->
+<string name="privacy_policy">Privacy Policy</string>
+<string name="privacy_policy_sub">How we protect your data</string>
+<string name="privacy_title">Privacy Policy (Coffee Bean Tracking App)</string>
+<string name="privacy_effective_date">Effective date: 2026-08-14</string>
+<string name="privacy_intro">Welcome to this app. It is a purely local, offline tool for recording and managing coffee bean roasting info, and supports printing roast labels via Bluetooth to a standard-protocol label printer.
+By using this app you confirm that you have read and agree to all terms of this privacy policy; if you do not agree, please stop using the app.</string>
+<string name="privacy_section_1_title">1. Information Collection</string>
+<string name="privacy_section_1_content">This app does not collect, upload, or share any personal information.
+1. No account registration or login required; no phone number, email, or ID requested.
+2. The app has no network capability — it never accesses the internet, never connects to any cloud server, and never uploads data.
+3. No analytics, tracking, ads, or crash-reporting third-party SDKs are integrated; nothing is ever reported externally.</string>
+<string name="privacy_section_2_title">2. Local Data Storage</string>
+<string name="privacy_section_2_content">All data you enter — roast records, bean info, curve parameters, label templates — is stored only in your phone\'s local storage and is accessible only to you.
+- Data is never synced to any network; backup and export are performed manually by you.
+- Uninstalling the app deletes the local database with it. Please keep your own backups of important data.</string>
+<string name="privacy_section_3_title">3. System Permissions</string>
+<string name="privacy_section_3_content">This app requests only the minimum permissions needed for its features, and no unrelated permissions.
+1. Bluetooth (BLE) permission
+Used only to search and connect to Bluetooth label printers for printing roast labels.
+Device info produced during scanning/connecting is handled temporarily in local memory — never saved or uploaded.
+If Bluetooth is denied, printing is unavailable but all local recording features still work.
+2. Local storage permission
+Used to save the roast record database and manually exported CSV files; the app only accesses its own files and does not read unrelated files on your phone.
+This app does not request camera, location, contacts, microphone, or other non-essential permissions.</string>
+<string name="privacy_section_4_title">4. Third-Party Services</string>
+<string name="privacy_section_4_content">This app uses no third-party services.
+It only performs local Bluetooth communication and reports no data.</string>
+<string name="privacy_section_5_title">5. Use by Minors</string>
+<string name="privacy_section_5_content">Minors should have a guardian read and agree to this privacy policy before using the app.</string>
+<string name="privacy_section_6_title">6. Policy Updates</string>
+<string name="privacy_section_6_content">This app is an offline tool; if future features change how data is handled, this policy will be updated.</string>
+<string name="privacy_section_7_title">7. Contact</string>
+<string name="privacy_section_7_content">This software is developed by an individual hobbyist. If you have questions, please reach out via the project\'s open-source page.</string>
+
+<!-- ============ Green Beans ============ -->
+<string name="green_bean_tab">Green Beans</string>
+<string name="roasted_bean_tab">Roasted Beans</string>
+<string name="add_green_bean">Add Green Bean</string>
+<string name="edit_green_bean">Edit Green Bean</string>
+<string name="green_bean_name">Bean Name</string>
+<string name="purchase_date">Purchase Date</string>
+<string name="purchase_grams">Purchase Weight</string>
+<string name="remaining_grams">Remaining Weight</string>
+<string name="no_green_beans">No green beans yet</string>
+<string name="green_bean_name_required">Please enter a bean name</string>
+<string name="altitude">Altitude</string>
+<string name="grade">Grade / Quality</string>
+<string name="harvest_year">Harvest Year</string>
+
+    <string name="consent_title">Welcome to BeanBag</string>
+    <string name="consent_accept">Agree &amp; Continue</string>
+    <string name="consent_decline">Disagree</string>
+    <string name="consent_confirm_title">Notice</string>
+    <string name="consent_confirm_message">You must agree to the Privacy Policy to use this app. Exit now?</string>
+    <string name="consent_exit">Exit App</string>
+    <string name="consent_recheck">Review Again</string>
+    <!-- Bridge permission description (permission description must reference a resource) -->
+    <string name="bridge_perm_label">RoastCurve Bridge</string>
+    <string name="bridge_perm_desc">Allow RoastCurve to deduct green bean stock after roasting</string>
+
+    <!-- Settings/Profile: backup & support -->
+    <string name="backup_title">💾 Data Backup</string>
+    <string name="backup_desc">Exports all stock and records to a JSON file. Import merges by ID and never deletes existing data. We recommend backing up after major changes.</string>
+    <string name="backup_export">Export Backup</string>
+    <string name="backup_import">Import from File</string>
+    <string name="support_dev_title">☕ Support the Developer</string>
+    <string name="support_dev_desc">BeanBag is free, open-source, and ad-free. If it helps you, feel free to buy me a coffee on Afdian (爱发电).</string>
+    <string name="sister_app">🔥 Sister App: RoastCurve — Roast curve monitoring &amp; auto-follow</string>
+
+    <!-- Extracted hardcoded strings -->
+    <string name="roast_level_light">Light</string>
+    <string name="roast_level_medium_light">Medium-Light</string>
+    <string name="roast_level_medium">Medium</string>
+    <string name="roast_level_medium_dark">Medium-Dark</string>
+    <string name="roast_level_dark">Dark</string>
+    <string name="roast_level_light_desc">Light (pour-over, floral)</string>
+    <string name="roast_level_medium_light_desc">Medium-Light</string>
+    <string name="roast_level_medium_desc">Medium (balanced, peak window)</string>
+    <string name="roast_level_medium_dark_desc">Medium-Dark (espresso oils)</string>
+    <string name="roast_level_dark_desc">Dark (espresso oils)</string>
+    <string name="theme_pure_white">Pure White</string>
+    <string name="theme_coffee_brown">Coffee Brown</string>
+    <string name="theme_forest_green">Forest Green</string>
+    <string name="theme_ocean_blue">Ocean Blue</string>
+    <string name="theme_sunset_orange">Sunset Orange</string>
+    <string name="theme_rose_pink">Rose Pink</string>
+    <string name="theme_lavender_purple">Lavender</string>
+    <string name="dark_follow_system">Follow System</string>
+    <string name="dark_light">Light Mode</string>
+    <string name="dark_dark">Dark Mode</string>
+    <string name="backup_saved">✅ Backup saved</string>
+    <string name="export_failed">❌ Export failed: %1$s</string>
+    <string name="import_confirm_title">Import backup?</string>
+    <string name="import_confirm_msg">Data from the backup will be merged by ID (existing IDs overwritten, new IDs inserted). No existing data will be deleted.</string>
+    <string name="import_done">✅ Import complete: %1$s roasted / %2$s green / %3$s records</string>
+    <string name="import_failed">❌ Import failed: %1$s</string>
+    <string name="clear_fill_history_confirm">Clear all fill-in history? This cannot be undone.</string>
+    <string name="bluetooth_perm_denied">Bluetooth permission denied — printing is unavailable. Please grant Bluetooth permission in app info.</string>
+    <string name="bluetooth_off">Please turn on Bluetooth first</string>
+    <string name="stock_minus">Stock-</string>
+    <string name="backup_saved_to">✅ Saved to %1$s</string>
+    <string name="backup_save_failed">❌ Save failed</string>
+    <string name="clear_all_records">Clear all records?</string>
+    <string name="clear_all_records_msg">All Brew History records will be deleted. This cannot be undone.</string>
+    <string name="continue_action">Continue</string>
+    <string name="confirm_clear_again">Confirm clear again</string>
+    <string name="confirm_clear_again_msg">Permanently clear ALL Brew History records?</string>
+    <string name="unknown_device">(Unknown device)</string>
+    <string name="printer_lifecycle_missing">LifecycleScope support missing</string>
+    <string name="connecting_to">Connecting to [%1$s] ...</string>
+    <string name="print_bean_label">Print Bean Label</string>
+    <string name="connect_failed">Connection failed. Make sure the printer is on and pairable. Reason: %1$s</string>
+    <string name="connected_generating">Connected, generating label (1/%1$d) ...</string>
+    <string name="sending_label_data">Sending label data (A=%1$d B=%2$d, %3$d copies) ...</string>
+    <string name="print_done_protocol">Print complete (protocol: %1$s). Phase1=gap mode+bitmap, Phase2=GS FF gap-align tear position. Falls back to 120 LF if GS FF fails.</string>
+    <string name="send_failed">Send failed: %1$s</string>
+    <string name="unknown">Unknown</string>
+    <string name="close">Close</string>
+    <string name="bluetooth_not_supported">Bluetooth not supported on this device</string>
+    <string name="bluetooth_not_initialized">Bluetooth not initialized</string>
+    <string name="invalid_mac">Invalid Bluetooth address: %1$s</string>
+    <string name="not_connected">Not connected to a printer</string>
+    <string name="share_failed">Share failed: %1$s</string>
+    <string name="unknown_error">Unknown error</string>
+    <string name="print_start">Start Printing</string>
+    <string name="stock_deduct_banner">Stock-%1$s</string>
+    <string name="roast_label_title">Coffee Bean</string>
+    <string name="label_roast_level">Roast:</string>
+    <string name="label_process">Process:</string>
+    <string name="label_origin">Origin:</string>
+    <string name="label_development">Dev. time:</string>
+    <string name="label_flavor">Flavor:</string>
+    <string name="label_roast_date">Roasted:</string>
+    <string name="label_best_before">Best by:</string>
+    <string name="label_rest_days">Rest:</string>
+    <string name="days_unit_format">%1$s days</string>
+    <string name="resting">Resting</string>
+    <string name="days_left">%1$d days left</string>
+    <string name="best_flavor_window">Best flavor window</string>
+    <string name="rested_days">Rested %1$d days</string>
+    <string name="past_flavor_window">Past flavor window</string>
+    <string name="over_days">Over by %1$d days</string>
+    <string name="flavor_rules_header">Flavor Window Rules</string>
+    <string name="flavor_rules_intro">Different roast levels have different rest and flavor windows:</string>
+    <string name="rest_label">Rest:</string>
+    <string name="days_unit_short">days</string>
+    <string name="flavor_window_label">Flavor window: day %1$s</string>
+    <string name="max_recommend">(not recommended beyond %1$d days)</string>
+    <string name="flavor_rules_tip">Tip: these are suggestions — adjust to your taste and the beans.</string>
+    <string name="suggestion_suffix">: rest %1$s days, flavor window about %2$s days</string>
+    <string name="online_full_ext">Online full version (external channel): %1$s</string>
+    <string name="online_full_cn">Online full version (domestic channel): %1$s</string>
+    <string name="app_external_partition">App external storage/%1$s</string>
+    <string name="backup_err_unreadable">Could not read the file</string>
+    <string name="backup_err_bad_format">Unrecognized file format (need a beanbag zip or json)</string>
+    <string name="backup_err_version">Backup format is newer (%1$s > %2$s). Please update the app first.</string>
+    <string name="backup_err_incompatible">Incompatible version</string>
+    <string name="backup_err_invalid">The file is not a valid BeanBag backup</string>
+    <string name="edit_stock_title">Edit Stock (g)</string>
+    <string name="edit_stock_hint">Enter new stock (g)</string>
+    <string name="edit_stock_invalid">Enter a valid weight (up to one decimal)</string>
+    <string name="bluetooth_not_supported_msg">Bluetooth not supported on this device</string>
+    <string name="consent_policy_text">Privacy Policy
+
+Updated: 2026-08-27　Policy version: 1
+
+Welcome to BeanBag (CoffeeBeanTracker). We know how important your personal information is. This app is designed around one principle: your data never leaves your device.
+
+1. What We Collect
+This app does not collect, upload, or share any of your personal information. No account registration is required, and no sensitive permissions (contacts, location, microphone, etc.) are requested.
+
+2. Where Your Data Lives
+All your green bean and roasted bean stock and brewing records are stored only in the app\'s private local directory on this device. Uninstalling the app deletes them permanently.
+
+3. File Access
+Storage is accessed only when you actively export or import backup/log files, and files are saved where you choose. Backup files are kept by you; we hold no copies.
+
+4. Protection of Minors
+This app is for coffee enthusiasts and does not collect any information from children.
+
+5. Policy Updates
+If future features involve any new data handling, we will update this policy and ask for your consent again via an in-app notice.
+</string>
+</resources>

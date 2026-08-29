@@ -148,7 +148,7 @@ object ShareHelper {
             context.startActivity(Intent.createChooser(shareIntent, title))
         } catch (t: Throwable) {
             t.printStackTrace()
-            ToastCustom.show(context, "分享失败: " + (t.message ?: "未知错误"), android.widget.Toast.LENGTH_SHORT)
+            ToastCustom.show(context, context.getString(com.coffee.beantracker.R.string.share_failed, t.message ?: context.getString(com.coffee.beantracker.R.string.unknown_error)), android.widget.Toast.LENGTH_SHORT)
         }
     }
 }

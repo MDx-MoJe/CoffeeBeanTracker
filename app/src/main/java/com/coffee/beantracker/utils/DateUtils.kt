@@ -46,7 +46,7 @@ data class BeanStatusInfo(
 )
 
 object BeanStatusCalculator {
-    fun calculateStatus(bean: com.coffee.beantracker.data.CoffeeBean): BeanStatusInfo {
+    fun calculateStatus(context: android.content.Context, bean: com.coffee.beantracker.data.CoffeeBean): BeanStatusInfo {
         val today = System.currentTimeMillis()
         val daysSinceRoast = DateUtils.getDaysBetween(bean.roastDate, today)
         val restDays = bean.restDays.toLong()
@@ -58,8 +58,8 @@ object BeanStatusCalculator {
                 val progress = ((daysSinceRoast.toDouble() / restDays) * 100).toInt().coerceIn(0, 100)
                 BeanStatusInfo(
                     status = BeanStatus.RESTING,
-                    displayText = "养豆中",
-                    daysDisplay = "还剩 ${remaining} 天",
+                    displayText = context.getString(com.coffee.beantracker.R.string.resting),
+                    daysDisplay = context.getString(com.coffee.beantracker.R.string.days_left, remaining),
                     progress = progress
                 )
             }
@@ -71,8 +71,8 @@ object BeanStatusCalculator {
                 } else 50
                 BeanStatusInfo(
                     status = BeanStatus.BEST_PERIOD,
-                    displayText = "最佳赏味期",
-                    daysDisplay = "已养 ${daysSinceRoast} 天",
+                    displayText = context.getString(com.coffee.beantracker.R.string.best_flavor_window),
+                    daysDisplay = context.getString(com.coffee.beantracker.R.string.rested_days, daysSinceRoast),
                     progress = bestProgress
                 )
             }
@@ -80,8 +80,8 @@ object BeanStatusCalculator {
                 val pastDays = daysSinceRoast - bestBefore
                 BeanStatusInfo(
                     status = BeanStatus.PAST_BEST,
-                    displayText = "已过赏味期",
-                    daysDisplay = "超过 ${pastDays} 天",
+                    displayText = context.getString(com.coffee.beantracker.R.string.past_flavor_window),
+                    daysDisplay = context.getString(com.coffee.beantracker.R.string.over_days, pastDays),
                     progress = 100
                 )
             }

@@ -31,25 +31,25 @@ class SettingsActivity : AppCompatActivity() {
             try {
                 val json = com.coffee.beantracker.utils.BackupManager.exportAll(this@SettingsActivity)
                 contentResolver.openOutputStream(uri)?.use { it.write(json.toByteArray()) }
-                showBackupStatus("✅ 备份已保存")
+                showBackupStatus(getString(R.string.backup_saved))
             } catch (e: Exception) {
-                showBackupStatus("❌ 导出失败：${e.message?.take(40)}")
+                showBackupStatus(getString(R.string.export_failed, e.message?.take(40) ?: ""))
             }
         }
     }
 
     private fun confirmImport(uri: android.net.Uri) {
         MaterialAlertDialogBuilder(this, R.style.ThemeOverlay_CoffeeBean_Dialog)
-            .setTitle("确认导入？")
-            .setMessage("将按 ID 合并备份中的数据（已有 ID 覆盖、新 ID 插入），不删除现有数据。")
+            .setTitle(R.string.import_confirm_title)
+            .setMessage(R.string.import_confirm_msg)
             .setPositiveButton(R.string.yes) { _, _ ->
                 lifecycleScope.launch {
                     val r = com.coffee.beantracker.utils.BackupManager.importFrom(this@SettingsActivity, uri)
                     r.fold(
                         onSuccess = { (b, g, ded) ->
-                            showBackupStatus("✅ 导入完成：熟豆 $b / 生豆 $g / 流水 $ded")
+                            showBackupStatus(getString(R.string.import_done, b, g, ded))
                         },
-                        onFailure = { showBackupStatus("❌ 导入失败：${it.message?.take(40)}") },
+                        onFailure = { showBackupStatus(getString(R.string.import_failed, it.message?.take(40) ?: "")) },
                     )
                 }
             }
@@ -152,7 +152,7 @@ class SettingsActivity : AppCompatActivity() {
     private fun buildThemePreview() {
         val container = binding.themeContainer
         container.removeAllViews()
-        val themes = AppTheme.displayList()
+        val themes = AppTheme.displayList(this)
         val current = ThemeManager.getCurrentTheme()
         val cardParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f)
         cardParams.setMargins(4, 0, 4, 0)
@@ -191,11 +191,11 @@ class SettingsActivity : AppCompatActivity() {
     }
 
     private fun updateDarkModeText() {
-        binding.tvDarkMode.text = ThemeManager.getDarkMode().displayName
+        binding.tvDarkMode.text = ThemeManager.getDarkMode().localizedName(this)
     }
 
     private fun showDarkModePicker() {
-        val options = DarkMode.displayList()
+        val options = DarkMode.displayList(this)
         val current = ThemeManager.getDarkMode()
         val labels = options.map { it.second }.toTypedArray()
         MaterialAlertDialogBuilder(this, R.style.ThemeOverlay_CoffeeBean_Dialog)
@@ -212,7 +212,7 @@ class SettingsActivity : AppCompatActivity() {
     private fun showClearHistoryConfirm() {
         MaterialAlertDialogBuilder(this, R.style.ThemeOverlay_CoffeeBean_Dialog)
             .setTitle(R.string.history_clear)
-            .setMessage("确认清空所有填写历史记录吗？此操作不可恢复。")
+            .setMessage(R.string.clear_fill_history_confirm)
             .setPositiveButton(R.string.yes) { _, _ ->
                 HistoryTagManager.clearAll()
                 ToastCustom.show(this, getString(R.string.history_cleared))

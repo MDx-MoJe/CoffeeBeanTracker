@@ -101,14 +101,14 @@ class DeductRecordsActivity : AppCompatActivity() {
     private fun showClearAllConfirm() {
         // 第一次确认
         MaterialAlertDialogBuilder(this, R.style.ThemeOverlay_CoffeeBean_Dialog)
-            .setTitle("清空所有记录？")
-            .setMessage("将删除全部「做一杯」历史记录，此操作不可恢复。")
+            .setTitle(R.string.clear_all_records)
+            .setMessage(R.string.clear_all_records_msg)
             .setNegativeButton(R.string.no, null)
-            .setPositiveButton("继续") { _, _ ->
+            .setPositiveButton(R.string.continue_action) { _, _ ->
                 // 第二次确认
                 MaterialAlertDialogBuilder(this, R.style.ThemeOverlay_CoffeeBean_Dialog)
-                    .setTitle("再次确认清空")
-                    .setMessage("确认要永久清空全部「做一杯」历史记录吗？")
+                    .setTitle(R.string.confirm_clear_again)
+                    .setMessage(R.string.confirm_clear_again_msg)
                     .setNegativeButton(R.string.no, null)
                     .setPositiveButton(R.string.yes) { _, _ ->
                         lifecycleScope.launch {

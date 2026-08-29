@@ -13,70 +13,83 @@ object FlavorPeriodHelper {
         val maxRecommend: Int = 30
     )
 
-    fun getRange(roastLevel: RoastLevel): FlavorRange {
+    fun getRange(context: android.content.Context, roastLevel: RoastLevel): FlavorRange {
         return when (roastLevel) {
             RoastLevel.LIGHT -> FlavorRange(
                 restMin = 7, restMax = 14,
                 flavorMin = 10, flavorMax = 30,
-                description = "浅烘（手冲花果调）"
+                description = context.getString(com.coffee.beantracker.R.string.roast_level_light_desc)
             )
             RoastLevel.MEDIUM_LIGHT -> FlavorRange(
                 restMin = 6, restMax = 12,
                 flavorMin = 8, flavorMax = 25,
-                description = "中浅烘"
+                description = context.getString(com.coffee.beantracker.R.string.roast_level_medium_light_desc)
             )
             RoastLevel.MEDIUM -> FlavorRange(
                 restMin = 5, restMax = 10,
                 flavorMin = 7, flavorMax = 21,
-                description = "中烘（均衡型，峰值窗口）"
+                description = context.getString(com.coffee.beantracker.R.string.roast_level_medium_desc)
             )
             RoastLevel.MEDIUM_DARK -> FlavorRange(
                 restMin = 3, restMax = 7,
                 flavorMin = 5, flavorMax = 14,
-                description = "中深烘（意式油脂调）"
+                description = context.getString(com.coffee.beantracker.R.string.roast_level_medium_dark_desc)
             )
             RoastLevel.DARK -> FlavorRange(
                 restMin = 3, restMax = 7,
                 flavorMin = 5, flavorMax = 14,
-                description = "深烘（意式油脂调）"
+                description = context.getString(com.coffee.beantracker.R.string.roast_level_dark_desc)
             )
         }
     }
 
-    fun getSuggestionText(roastLevel: RoastLevel): String {
-        val r = getRange(roastLevel)
-        return r.description + "：养豆 " + r.restMin + "-" + r.restMax + " 天，赏味期约 " + r.flavorMin + "-" + r.flavorMax + " 天"
+    fun getSuggestionText(context: android.content.Context, roastLevel: RoastLevel): String {
+        val r = getRange(context, roastLevel)
+        return context.getString(com.coffee.beantracker.R.string.suggestion_suffix, r.restMin.toString() + "-" + r.restMax, r.flavorMin.toString() + "-" + r.flavorMax)
+            .let { r.description + it }
     }
 
     /** 推荐养豆天数（区间中值，四舍五入） */
     fun getDefaultRestDays(roastLevel: RoastLevel): Int {
-        val r = getRange(roastLevel)
+        val r = rangeOf(roastLevel)
         return Math.round((r.restMin + r.restMax) / 2f)
     }
 
     /** 推荐赏味天数（区间中值，四舍五入） */
     fun getDefaultBestBefore(roastLevel: RoastLevel): Int {
-        val r = getRange(roastLevel)
+        val r = rangeOf(roastLevel)
         return Math.round((r.flavorMin + r.flavorMax) / 2f)
     }
 
-    fun getFullRulesText(): String {
+    /** 数值专用（不含描述文案），供纯计算使用 */
+    private fun rangeOf(roastLevel: RoastLevel): FlavorRange {
+        return when (roastLevel) {
+            RoastLevel.LIGHT -> FlavorRange(7, 14, 10, 30, "")
+            RoastLevel.MEDIUM_LIGHT -> FlavorRange(6, 12, 8, 25, "")
+            RoastLevel.MEDIUM -> FlavorRange(5, 10, 7, 21, "")
+            RoastLevel.MEDIUM_DARK -> FlavorRange(3, 7, 5, 14, "")
+            RoastLevel.DARK -> FlavorRange(3, 7, 5, 14, "")
+        }
+    }
+
+    fun getFullRulesText(context: android.content.Context): String {
         val sb = StringBuilder()
-        sb.append("【赏味期计算规则】\n\n")
-        sb.append("不同烘焙深度的咖啡豆，养豆时间和赏味期各不相同：\n\n")
+        sb.append(context.getString(com.coffee.beantracker.R.string.flavor_rules_header)).append("\n\n")
+        sb.append(context.getString(com.coffee.beantracker.R.string.flavor_rules_intro)).append("\n\n")
 
         for (level in RoastLevel.values()) {
-            val r = getRange(level)
+            val r = getRange(context, level)
             sb.append("◆ ").append(r.description).append("\n")
-            sb.append("  养豆：").append(r.restMin).append("-").append(r.restMax).append(" 天\n")
-            sb.append("  赏味期：第 ").append(r.flavorMin).append("-").append(r.flavorMax).append(" 天")
+            sb.append("  ").append(context.getString(com.coffee.beantracker.R.string.rest_label))
+                .append(r.restMin).append("-").append(r.restMax).append(" ").append(context.getString(com.coffee.beantracker.R.string.days_unit_short)).append("\n")
+            sb.append("  ").append(context.getString(com.coffee.beantracker.R.string.flavor_window_label, r.flavorMin.toString() + "-" + r.flavorMax))
             if (r.maxRecommend < 30) {
-                sb.append("（最长不建议超 ").append(r.maxRecommend).append(" 天）")
+                sb.append(context.getString(com.coffee.beantracker.R.string.max_recommend, r.maxRecommend))
             }
             sb.append("\n\n")
         }
 
-        sb.append("提示：以上为建议范围，具体可根据个人口味和豆子特性微调。")
+        sb.append(context.getString(com.coffee.beantracker.R.string.flavor_rules_tip))
         return sb.toString()
     }
 }

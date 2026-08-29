@@ -76,7 +76,7 @@ class PrintFlowHelper private constructor(
         pendingBean = bean
         pendingCopies = copies.coerceAtLeast(1)
         pendingProtocol = protocol
-        if (!printerMgr.isBluetoothAvailable()) { toast("此设备不支持蓝牙"); return }
+        if (!printerMgr.isBluetoothAvailable()) { toast(context.getString(R.string.bluetooth_not_supported_msg)); return }
         if (!printerMgr.isBluetoothEnabled()) {
             val i = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
             enableBtLauncher?.launch(i); return
@@ -114,23 +114,23 @@ class PrintFlowHelper private constructor(
         val paired = printerMgr.getPairedDevices()
         if (paired.isEmpty()) {
             MaterialAlertDialogBuilder(context, R.style.ThemeOverlay_CoffeeBean_Dialog)
-                .setTitle("未发现已配对的标签机")
-                .setMessage("请先打开手机「设置 → 蓝牙」，搜索并与打印机完成配对（配对 PIN 通常为 0000 或 1234）。配对成功后重新点击打印即可。设备名通常包含：HPRT / T260 / HM-T")
-                .setPositiveButton("知道了", null)
+                .setTitle(R.string.printer_not_paired)
+                .setMessage(R.string.printer_not_paired_msg)
+                .setPositiveButton(R.string.close, null)
                 .show()
             return
         }
         val labels = paired.map { (devE, likely) ->
-            val name = try { devE.name ?: "(未知设备)" } catch (_: Throwable) { "(未知设备)" }
+            val name = try { devE.name ?: context.getString(R.string.unknown_device) } catch (_: Throwable) { context.getString(R.string.unknown_device) }
             val flag = if (likely) "  ✨" else ""
             "$name$flag  [${devE.address}]"
         }
         MaterialAlertDialogBuilder(context, R.style.ThemeOverlay_CoffeeBean_Dialog)
-            .setTitle("选择要打印的蓝牙设备")
+            .setTitle(R.string.printer_choose_title)
             .setSingleChoiceItems(labels.toTypedArray(), 0, null)
             .setCancelable(true)
-            .setNegativeButton("取消", null)
-            .setPositiveButton("开始打印") { dlg, _ ->
+            .setNegativeButton(R.string.cancel, null)
+            .setPositiveButton(R.string.print_start) { dlg, _ ->
                 val which = (dlg as AlertDialog).listView.checkedItemPosition
                 if (which < 0 || which >= paired.size) return@setPositiveButton
                 val device = paired[which].first
@@ -144,48 +144,48 @@ class PrintFlowHelper private constructor(
         val copies = pendingCopies
         val scope = (context as? androidx.activity.ComponentActivity)?.lifecycleScope
             ?: (context as? androidx.fragment.app.FragmentActivity)?.lifecycleScope
-            ?: run { toast("缺少 LifecycleScope 支持"); return }
+            ?: run { toast(context.getString(R.string.printer_lifecycle_missing)); return }
 
         var dlg: AlertDialog? = null
         val msgView = TextView(context).apply {
-            text = "正在连接 [${device.address}] ..."
+            text = context.getString(R.string.connecting_to, device.address)
             setPadding(56, 48, 56, 24)
             textSize = 15f
         }
         dlg = MaterialAlertDialogBuilder(context, R.style.ThemeOverlay_CoffeeBean_Dialog)
-            .setTitle("打印咖啡豆标签")
+            .setTitle(R.string.print_bean_label)
             .setView(msgView)
             .setCancelable(false)
-            .setNegativeButton("取消", null)
+            .setNegativeButton(R.string.cancel, null)
             .create().also { it.show() }
 
         scope.launch {
             val conn = printerMgr.connect(device.address)
             if (conn.isFailure) {
-                msgView.text = "连接失败，请确认打印机已开机并处于可配对状态。原因: " + (conn.exceptionOrNull()?.message ?: "未知错误")
+                msgView.text = context.getString(R.string.connect_failed, conn.exceptionOrNull()?.message ?: context.getString(R.string.unknown_error))
                 dlg?.setCancelable(true)
-                dlg?.getButton(AlertDialog.BUTTON_NEGATIVE)?.text = "关闭"
+                dlg?.getButton(AlertDialog.BUTTON_NEGATIVE)?.text = context.getString(R.string.close)
                 return@launch
             }
-            msgView.text = "连接成功，正在生成标签 (1/$copies) ..."
+            msgView.text = context.getString(R.string.connected_generating, copies)
             // 改：调用 buildCoffeeBeanLabelPacket 返回 Pair<Phase1, Phase2>
             val labelPacket = withContext(Dispatchers.Default) {
-                TscLabelBuilder.buildCoffeeBeanLabelPacket(bean, dateFormat, pendingProtocol)
+                TscLabelBuilder.buildCoffeeBeanLabelPacket(context, bean, dateFormat, pendingProtocol)
             }
-            msgView.text = "发送数据到打印机 (A=${labelPacket.first.size} B=${labelPacket.second.size}, $copies 份) ..."
+            msgView.text = context.getString(R.string.sending_label_data, labelPacket.first.size, labelPacket.second.size, copies)
             val printed = printerMgr.printLabel(labelPacket, copies)
             // 再保底等待 3000ms 再关连接
             withContext(Dispatchers.IO) { Thread.sleep(3000) }
             printerMgr.disconnect()
             if (printed.isSuccess) {
-                msgView.text = "打印完成（协议：${pendingProtocol.name}）。Phase1=间隙模式+位图，Phase2=GS FF间隙对齐撕纸位。若GS FF不生效则兜底120LF。"
+                msgView.text = context.getString(R.string.print_done_protocol, pendingProtocol.name)
                 dlg?.setCancelable(true)
-                dlg?.getButton(AlertDialog.BUTTON_NEGATIVE)?.text = "关闭"
-                toast("打印已发送 ($copies 份)")
+                dlg?.getButton(AlertDialog.BUTTON_NEGATIVE)?.text = context.getString(R.string.close)
+                toast(context.getString(R.string.printer_done_copies, copies))
             } else {
-                msgView.text = "发送失败: " + (printed.exceptionOrNull()?.message ?: "未知")
+                msgView.text = context.getString(R.string.send_failed, printed.exceptionOrNull()?.message ?: context.getString(R.string.unknown))
                 dlg?.setCancelable(true)
-                dlg?.getButton(AlertDialog.BUTTON_NEGATIVE)?.text = "关闭"
+                dlg?.getButton(AlertDialog.BUTTON_NEGATIVE)?.text = context.getString(R.string.close)
             }
         }
     }

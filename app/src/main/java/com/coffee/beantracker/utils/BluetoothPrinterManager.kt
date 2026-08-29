@@ -80,9 +80,9 @@ class BluetoothPrinterManager(private val context: Context) {
             if (isConnected && connectedMac == mac) return@withContext Result.success(Unit)
             disconnect()
             val adapter = (context.getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager?)?.adapter
-                ?: return@withContext Result.failure(IllegalStateException("蓝牙未初始化"))
+                ?: return@withContext Result.failure(IllegalStateException(context.getString(com.coffee.beantracker.R.string.bluetooth_not_initialized)))
             val device = try { adapter.getRemoteDevice(mac) } catch (t: Throwable) {
-                return@withContext Result.failure(IllegalArgumentException("无效的蓝牙地址: $mac"))
+                return@withContext Result.failure(IllegalArgumentException(context.getString(com.coffee.beantracker.R.string.invalid_mac, mac)))
             }
             val sock = try {
                 device.createRfcommSocketToServiceRecord(SPP_UUID)
@@ -119,7 +119,7 @@ class BluetoothPrinterManager(private val context: Context) {
 
     suspend fun sendData(bytes: ByteArray): Result<Unit> = withContext(Dispatchers.IO) {
         try {
-            val os = outStream ?: return@withContext Result.failure(IOException("未连接到打印机"))
+            val os = outStream ?: return@withContext Result.failure(IOException(context.getString(com.coffee.beantracker.R.string.not_connected)))
             // 分块：512B/块，间隔 20ms，尾块 flush 后等 50ms
             var off = 0
             while (off < bytes.size) {

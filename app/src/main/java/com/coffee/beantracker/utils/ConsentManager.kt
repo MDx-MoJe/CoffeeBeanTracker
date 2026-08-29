@@ -48,7 +48,7 @@ object ConsentManager {
             setPadding(48, 24, 48, 24)
             textSize = 14f
             setTextIsSelectable(false)
-            text = PRIVACY_POLICY_TEXT
+            text = activity.getString(com.coffee.beantracker.R.string.consent_policy_text)
         }
         scroll.addView(text)
 
@@ -76,37 +76,18 @@ object ConsentManager {
         }
 
         // 在线链接预留入口（配置了才显示）：追加到正文末尾
+        val policyText = activity.getString(com.coffee.beantracker.R.string.consent_policy_text)
         val urls = listOfNotNull(
-            if (PRIVACY_URL_EXTERNAL.isNotEmpty()) "在线完整版（外部渠道）：$PRIVACY_URL_EXTERNAL" else null,
-            if (PRIVACY_URL_CN.isNotEmpty()) "在线完整版（国内渠道）：$PRIVACY_URL_CN" else null,
+            if (PRIVACY_URL_EXTERNAL.isNotEmpty()) activity.getString(com.coffee.beantracker.R.string.online_full_ext, PRIVACY_URL_EXTERNAL) else null,
+            if (PRIVACY_URL_CN.isNotEmpty()) activity.getString(com.coffee.beantracker.R.string.online_full_cn, PRIVACY_URL_CN) else null,
         )
         if (urls.isNotEmpty()) {
-            text.text = PRIVACY_POLICY_TEXT + "\n" + urls.joinToString("\n")
+            text.text = policyText + "\n" + urls.joinToString("\n")
+        } else {
+            text.text = policyText
         }
 
         dialog.show()
         return false
     }
-
-    private const val PRIVACY_POLICY_TEXT = """《隐私政策》
-
-更新日期：2026-08-27　政策版本：1
-
-欢迎使用豆袋（CoffeeBeanTracker）。我们深知个人信息对您的重要性，本应用在设计上即遵循"数据不出设备"原则：
-
-一、我们收集什么
-本应用不收集、不上传、不分享您的任何个人信息。无需注册账号，不申请通讯录、位置、麦克风等敏感权限。
-
-二、数据存储位置
-您的所有生豆、熟豆库存与冲煮记录仅保存在本机应用私有目录中。卸载应用即彻底删除。
-
-三、文件读写
-仅当您主动导出或导入备份/日志文件时访问系统存储，文件保存在您指定的位置。备份文件由您自行保管，我们不持有副本。
-
-四、未成年人保护
-本应用面向咖啡爱好者，不针对儿童收集任何信息。
-
-五、政策更新
-若未来应用引入任何新功能涉及数据处理，我们将更新本政策并通过应用内弹窗重新征求您的同意。
-"""
 }

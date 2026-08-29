@@ -61,9 +61,9 @@ class ProfileFragment : Fragment() {
                     val zip = com.coffee.beantracker.utils.BackupManager.packZip(json)
                     val name = com.coffee.beantracker.utils.BackupManager.suggestedFileName()
                     val where = com.coffee.beantracker.utils.BackupManager.saveToDownloads(requireContext(), name, zip)
-                    showBackupStatus(if (where != null) "✅ 已保存到 $where" else "❌ 保存失败")
+                    showBackupStatus(if (where != null) getString(R.string.backup_saved_to, where) else getString(R.string.backup_save_failed))
                 } catch (e: Exception) {
-                    showBackupStatus("❌ 导出失败：${e.message?.take(40)}")
+                    showBackupStatus(getString(R.string.export_failed, e.message?.take(40) ?: ""))
                 }
             }
         }
@@ -86,17 +86,17 @@ class ProfileFragment : Fragment() {
 
     private fun confirmImport(uri: android.net.Uri) {
         MaterialAlertDialogBuilder(requireContext(), R.style.ThemeOverlay_CoffeeBean_Dialog)
-            .setTitle("确认导入？")
-            .setMessage("将按 ID 合并备份中的数据（已有 ID 覆盖、新 ID 插入），不删除现有数据。")
+            .setTitle(R.string.import_confirm_title)
+            .setMessage(R.string.import_confirm_msg)
             .setPositiveButton(R.string.yes) { _, _ ->
                 lifecycleScope.launch {
                     val r = com.coffee.beantracker.utils.BackupManager.importFrom(requireContext(), uri)
                     r.fold(
                         onSuccess = { (b, g, ded) ->
-                            showBackupStatus("✅ 导入完成：熟豆 $b / 生豆 $g / 流水 $ded")
+                            showBackupStatus(getString(R.string.import_done, b, g, ded))
                         },
                         onFailure = {
-                            showBackupStatus("❌ 导入失败：${com.coffee.beantracker.utils.BackupManager.friendlyError(it)}")
+                            showBackupStatus(getString(R.string.import_failed, com.coffee.beantracker.utils.BackupManager.friendlyError(requireContext(), it)))
                         },
                     )
                 }
@@ -130,7 +130,7 @@ class ProfileFragment : Fragment() {
         val ctx = requireContext()
         val container = binding.themeContainer
         container.removeAllViews()
-        val themes = AppTheme.displayList()
+        val themes = AppTheme.displayList(ctx)
         val current = ThemeManager.getCurrentTheme()
         val cardParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f)
         cardParams.setMargins(4, 0, 4, 0)
@@ -166,11 +166,11 @@ class ProfileFragment : Fragment() {
     }
 
     private fun updateDarkModeText() {
-        binding.tvDarkMode.text = ThemeManager.getDarkMode().displayName
+        binding.tvDarkMode.text = ThemeManager.getDarkMode().localizedName(requireContext())
     }
 
     private fun showDarkModePicker() {
-        val options = DarkMode.displayList()
+        val options = DarkMode.displayList(requireContext())
         val current = ThemeManager.getDarkMode()
         val labels = options.map { it.second }.toTypedArray()
         MaterialAlertDialogBuilder(requireContext(), R.style.ThemeOverlay_CoffeeBean_Dialog)

@@ -223,4 +223,128 @@
     <!-- 互联桥接权限说明（permission description 要求资源引用） -->
     <string name="bridge_perm_label">烤豆互联桥接</string>
     <string name="bridge_perm_desc">允许烤豆应用在烘焙出豆后同步扣减生豆库存</string>
+
+    <!-- 设置页/我的页 数据备份 & 支持开发者 -->
+    <string name="backup_title">💾 数据备份</string>
+    <string name="backup_desc">库存、记录全部导出为 JSON 文件。导入按 ID 合并、不删除现有数据。建议每次大变动后备份一次。</string>
+    <string name="backup_export">导出备份</string>
+    <string name="backup_import">从文件导入</string>
+    <string name="support_dev_title">☕ 支持开发者</string>
+    <string name="support_dev_desc">豆袋永久免费、开源、无广告。如果你觉得它帮到了你，欢迎到爱发电请我喝杯咖啡。</string>
+    <string name="sister_app">🔥 姐妹应用：烤豆 RoastCurve —— 烘焙曲线监控与自动跟随</string>
+
+    <!-- 代码硬编码提取 -->
+    <string name="roast_level_light">浅烘</string>
+    <string name="roast_level_medium_light">中浅烘</string>
+    <string name="roast_level_medium">中烘</string>
+    <string name="roast_level_medium_dark">中深烘</string>
+    <string name="roast_level_dark">深烘</string>
+    <string name="roast_level_light_desc">浅烘（手冲花果调）</string>
+    <string name="roast_level_medium_light_desc">中浅烘</string>
+    <string name="roast_level_medium_desc">中烘（均衡型，峰值窗口）</string>
+    <string name="roast_level_medium_dark_desc">中深烘（意式油脂调）</string>
+    <string name="roast_level_dark_desc">深烘（意式油脂调）</string>
+    <string name="theme_pure_white">纯净白</string>
+    <string name="theme_coffee_brown">咖啡棕</string>
+    <string name="theme_forest_green">森林绿</string>
+    <string name="theme_ocean_blue">海洋蓝</string>
+    <string name="theme_sunset_orange">落日橙</string>
+    <string name="theme_rose_pink">玫瑰粉</string>
+    <string name="theme_lavender_purple">薰衣紫</string>
+    <string name="dark_follow_system">跟随系统</string>
+    <string name="dark_light">浅色模式</string>
+    <string name="dark_dark">深色模式</string>
+    <string name="backup_saved">✅ 备份已保存</string>
+    <string name="export_failed">❌ 导出失败：%1$s</string>
+    <string name="import_confirm_title">确认导入？</string>
+    <string name="import_confirm_msg">将按 ID 合并备份中的数据（已有 ID 覆盖、新 ID 插入），不删除现有数据。</string>
+    <string name="import_done">✅ 导入完成：熟豆 %1$s / 生豆 %2$s / 流水 %3$s</string>
+    <string name="import_failed">❌ 导入失败：%1$s</string>
+    <string name="clear_fill_history_confirm">确认清空所有填写历史记录吗？此操作不可恢复。</string>
+    <string name="bluetooth_perm_denied">蓝牙权限被拒绝，无法使用打印功能。请在应用信息中授权蓝牙权限。</string>
+    <string name="bluetooth_off">请先打开手机蓝牙再打印</string>
+    <string name="stock_minus">库存-</string>
+    <string name="backup_saved_to">✅ 已保存到 %1$s</string>
+    <string name="backup_save_failed">❌ 保存失败</string>
+    <string name="clear_all_records">清空所有记录？</string>
+    <string name="clear_all_records_msg">将删除全部「做一杯」历史记录，此操作不可恢复。</string>
+    <string name="continue_action">继续</string>
+    <string name="confirm_clear_again">再次确认清空</string>
+    <string name="confirm_clear_again_msg">确认要永久清空全部「做一杯」历史记录吗？</string>
+    <string name="unknown_device">(未知设备)</string>
+    <string name="printer_lifecycle_missing">缺少 LifecycleScope 支持</string>
+    <string name="connecting_to">正在连接 [%1$s] ...</string>
+    <string name="print_bean_label">打印咖啡豆标签</string>
+    <string name="connect_failed">连接失败，请确认打印机已开机并处于可配对状态。原因: %1$s</string>
+    <string name="connected_generating">连接成功，正在生成标签 (1/%1$d) ...</string>
+    <string name="sending_label_data">发送数据到打印机 (A=%1$d B=%2$d, %3$d 份) ...</string>
+    <string name="print_done_protocol">打印完成（协议：%1$s）。Phase1=间隙模式+位图，Phase2=GS FF间隙对齐撕纸位。若GS FF不生效则兜底120LF。</string>
+    <string name="send_failed">发送失败: %1$s</string>
+    <string name="unknown">未知</string>
+    <string name="close">关闭</string>
+    <string name="bluetooth_not_supported">此设备不支持蓝牙</string>
+    <string name="bluetooth_not_initialized">蓝牙未初始化</string>
+    <string name="invalid_mac">无效的蓝牙地址: %1$s</string>
+    <string name="not_connected">未连接到打印机</string>
+    <string name="share_failed">分享失败: %1$s</string>
+    <string name="unknown_error">未知错误</string>
+    <string name="print_start">开始打印</string>
+    <string name="stock_deduct_banner">库存-%1$s</string>
+    <string name="roast_label_title">咖啡豆</string>
+    <string name="label_roast_level">烘焙深度:</string>
+    <string name="label_process">处理方式:</string>
+    <string name="label_origin">产地:</string>
+    <string name="label_development">发展时间:</string>
+    <string name="label_flavor">风味描述:</string>
+    <string name="label_roast_date">烘焙日期:</string>
+    <string name="label_best_before">赏味期限:</string>
+    <string name="label_rest_days">养豆时间:</string>
+    <string name="days_unit_format">%1$s 天</string>
+    <string name="resting">养豆中</string>
+    <string name="days_left">还剩 %1$d 天</string>
+    <string name="best_flavor_window">最佳赏味期</string>
+    <string name="rested_days">已养 %1$d 天</string>
+    <string name="past_flavor_window">已过赏味期</string>
+    <string name="over_days">超过 %1$d 天</string>
+    <string name="flavor_rules_header">【赏味期计算规则】</string>
+    <string name="flavor_rules_intro">不同烘焙深度的咖啡豆，养豆时间和赏味期各不相同：</string>
+    <string name="rest_label">养豆：</string>
+    <string name="days_unit_short">天</string>
+    <string name="flavor_window_label">赏味期：第 %1$s 天</string>
+    <string name="max_recommend">（最长不建议超 %1$d 天）</string>
+    <string name="flavor_rules_tip">提示：以上为建议范围，具体可根据个人口味和豆子特性微调。</string>
+    <string name="suggestion_suffix">：养豆 %1$s 天，赏味期约 %2$s 天</string>
+    <string name="online_full_ext">在线完整版（外部渠道）：%1$s</string>
+    <string name="online_full_cn">在线完整版（国内渠道）：%1$s</string>
+    <string name="app_external_partition">App外部分区/%1$s</string>
+    <string name="backup_err_unreadable">无法读取文件</string>
+    <string name="backup_err_bad_format">文件格式无法识别（需要 beanbag zip 或 json）</string>
+    <string name="backup_err_version">备份文件版本过新（%1$s > %2$s），请先升级 App</string>
+    <string name="backup_err_incompatible">版本不兼容</string>
+    <string name="backup_err_invalid">文件内容不是有效的豆袋备份</string>
+    <string name="edit_stock_title">修改库存克数</string>
+    <string name="edit_stock_hint">请输入新的库存（克）</string>
+    <string name="edit_stock_invalid">请输入有效的克数（支持一位小数）</string>
+    <string name="bluetooth_not_supported_msg">此设备不支持蓝牙</string>
+    <string name="consent_policy_text">《隐私政策》
+
+更新日期：2026-08-27　政策版本：1
+
+欢迎使用豆袋（CoffeeBeanTracker）。我们深知个人信息对您的重要性，本应用在设计上即遵循"数据不出设备"原则：
+
+一、我们收集什么
+本应用不收集、不上传、不分享您的任何个人信息。无需注册账号，不申请通讯录、位置、麦克风等敏感权限。
+
+二、数据存储位置
+您的所有生豆、熟豆库存与冲煮记录仅保存在本机应用私有目录中。卸载应用即彻底删除。
+
+三、文件读写
+仅当您主动导出或导入备份/日志文件时访问系统存储，文件保存在您指定的位置。备份文件由您自行保管，我们不持有副本。
+
+四、未成年人保护
+本应用面向咖啡爱好者，不针对儿童收集任何信息。
+
+五、政策更新
+若未来应用引入任何新功能涉及数据处理，我们将更新本政策并通过应用内弹窗重新征求您的同意。
+</string>
 </resources>

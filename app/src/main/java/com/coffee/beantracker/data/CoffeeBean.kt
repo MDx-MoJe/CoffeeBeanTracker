@@ -9,7 +9,19 @@ enum class RoastLevel(val displayName: String) {
     MEDIUM_LIGHT("中浅烘"),
     MEDIUM("中烘"),
     MEDIUM_DARK("中深烘"),
-    DARK("深烘")
+    DARK("深烘");
+
+    /** 本地化名称：跟随系统语言（en→Light/Medium/...，其余回退中文） */
+    fun localizedName(context: android.content.Context): String {
+        val resId = when (this) {
+            LIGHT -> com.coffee.beantracker.R.string.roast_level_light
+            MEDIUM_LIGHT -> com.coffee.beantracker.R.string.roast_level_medium_light
+            MEDIUM -> com.coffee.beantracker.R.string.roast_level_medium
+            MEDIUM_DARK -> com.coffee.beantracker.R.string.roast_level_medium_dark
+            DARK -> com.coffee.beantracker.R.string.roast_level_dark
+        }
+        return context.getString(resId)
+    }
 }
 
 @Entity(tableName = "coffee_beans")
@@ -34,8 +46,8 @@ data class CoffeeBean(
     val createdAt: Long = System.currentTimeMillis()
 ) {
     companion object {
-        fun getRoastLevels(): List<Pair<String, String>> {
-            return RoastLevel.values().map { it.name to it.displayName }
+        fun getRoastLevels(context: android.content.Context): List<Pair<String, String>> {
+            return RoastLevel.values().map { it.name to it.localizedName(context) }
         }
     }
 }

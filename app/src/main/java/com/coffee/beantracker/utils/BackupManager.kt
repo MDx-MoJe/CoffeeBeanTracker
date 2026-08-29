@@ -99,7 +99,7 @@ object BackupManager {
         } else {
             val dir = java.io.File(context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), "").apply { mkdirs() }
             java.io.File(dir, filename).writeBytes(data)
-            "App外部分区/$filename"
+            context.getString(com.coffee.beantracker.R.string.app_external_partition, filename)
         }
         } catch (_: Exception) {
             null
@@ -132,7 +132,7 @@ object BackupManager {
                 val bundle = json.decodeFromString<BackupBundle>(jsonText)
                 if (bundle.formatVersion > FORMAT_VERSION) {
                     return@withContext Result.failure(
-                        IllegalStateException("备份文件版本过新（${bundle.formatVersion} > $FORMAT_VERSION），请先升级 App")
+                        IllegalStateException(context.getString(com.coffee.beantracker.R.string.backup_err_version, bundle.formatVersion.toString(), FORMAT_VERSION.toString()))
                     )
                 }
                 val db = CoffeeBeanDatabase.getDatabase(context)
@@ -154,9 +154,9 @@ object BackupManager {
         withContext(Dispatchers.IO) {
             try {
                 val raw = context.contentResolver.openInputStream(uri)?.use { it.readBytes() }
-                    ?: return@withContext Result.failure(IllegalStateException("无法读取文件"))
+                    ?: return@withContext Result.failure(IllegalStateException(context.getString(com.coffee.beantracker.R.string.backup_err_unreadable)))
                 val text = unpackZip(raw)
-                    ?: return@withContext Result.failure(IllegalStateException("文件格式无法识别（需要 beanbag zip 或 json）"))
+                    ?: return@withContext Result.failure(IllegalStateException(context.getString(com.coffee.beantracker.R.string.backup_err_bad_format)))
                 importFrom(context, text)
             } catch (e: Exception) {
                 Result.failure(e)
@@ -164,8 +164,8 @@ object BackupManager {
         }
 
     /** 导入前的友好错误提示（避免暴露序列化细节） */
-    fun friendlyError(e: Throwable): String = when {
-        e.message?.contains("version") == true -> e.message ?: "版本不兼容"
-        else -> "文件内容不是有效的豆袋备份"
+    fun friendlyError(context: android.content.Context, e: Throwable): String = when {
+        e.message?.contains("version") == true -> e.message ?: context.getString(com.coffee.beantracker.R.string.backup_err_incompatible)
+        else -> context.getString(com.coffee.beantracker.R.string.backup_err_invalid)
     }
 }

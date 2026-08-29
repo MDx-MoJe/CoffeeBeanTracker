@@ -52,7 +52,7 @@ class HomeFragment : Fragment() {
             printFlow.onPermissionsGranted()
         } else {
             val ctx = context ?: return@registerForActivityResult
-            ToastCustom.show(ctx, "蓝牙权限被拒绝，无法使用打印功能。请在应用信息中授权蓝牙权限。", android.widget.Toast.LENGTH_LONG)
+            ToastCustom.show(ctx, ctx.getString(R.string.bluetooth_perm_denied), android.widget.Toast.LENGTH_LONG)
         }
     }
 
@@ -63,7 +63,7 @@ class HomeFragment : Fragment() {
             printFlow.onBluetoothEnabled()
         } else {
             val ctx = context ?: return@registerForActivityResult
-            ToastCustom.show(ctx, "请先打开手机蓝牙再打印")
+            ToastCustom.show(ctx, ctx.getString(R.string.bluetooth_off))
         }
     }
 
@@ -180,7 +180,7 @@ class HomeFragment : Fragment() {
                 if (count > 99) db.deductRecordDao().deleteOldest(count - 99)
             }
             val ctx = context ?: return@launch
-            ToastCustom.show(ctx, "库存-" + GramFormatter.formatWithUnit(grams))
+            ToastCustom.show(ctx, ctx.getString(R.string.stock_deduct_banner, GramFormatter.formatWithUnit(grams)))
         }
     }
 

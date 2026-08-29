@@ -94,7 +94,7 @@ class CoffeeBeanAdapter(
             val subParts = listOfNotNull(
                 if (bean.origin.isEmpty()) null else bean.origin,
                 try {
-                    RoastLevel.valueOf(bean.roastLevel).displayName
+                    RoastLevel.valueOf(bean.roastLevel).localizedName(ctx)
                 } catch (e: Exception) { bean.roastLevel },
                 if (bean.processMethod.isEmpty()) null else bean.processMethod
             )
@@ -113,11 +113,11 @@ binding.tvRestBadge.setBackgroundResource(status.badgeColor)
 
             binding.tvRestBadge.setOnClickListener { v ->
                 v.parent?.requestDisallowInterceptTouchEvent(true)
-                val rulesText = FlavorPeriodHelper.getFullRulesText()
+                val rulesText = FlavorPeriodHelper.getFullRulesText(ctx)
                 MaterialAlertDialogBuilder(ctx, R.style.ThemeOverlay_CoffeeBean_Dialog)
-                    .setTitle("赏味期计算规则")
+                    .setTitle(R.string.flavor_rules_title)
                     .setMessage(rulesText)
-                    .setPositiveButton("知道了", null)
+                    .setPositiveButton(R.string.close, null)
                     .show()
             }
 
@@ -203,8 +203,8 @@ binding.tvRestBadge.setBackgroundResource(status.badgeColor)
                     ))
                 }
                 MaterialAlertDialogBuilder(ctx, R.style.ThemeOverlay_CoffeeBean_Dialog)
-                    .setTitle("修改库存克数")
-                    .setMessage("请输入新的库存（克）")
+                    .setTitle(R.string.edit_stock_title)
+                    .setMessage(R.string.edit_stock_hint)
                     .setView(container)
                     .setNegativeButton(R.string.no, null)
                     .setPositiveButton(R.string.yes) { _, _ ->
@@ -213,7 +213,7 @@ binding.tvRestBadge.setBackgroundResource(status.badgeColor)
                         if (grams != null && grams >= 0) {
                             onModifyStock(bean, grams)
                         } else {
-                            ToastCustom.show(ctx, "请输入有效的克数（支持一位小数）", android.widget.Toast.LENGTH_SHORT)
+                            ToastCustom.show(ctx, ctx.getString(R.string.edit_stock_invalid), android.widget.Toast.LENGTH_SHORT)
                         }
                     }
                     .show()

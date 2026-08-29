@@ -50,11 +50,12 @@ object TscLabelBuilder {
     private val ASCII: Charset by lazy { Charset.forName("ISO-8859-1") }
 
     fun buildCoffeeBeanLabelPacket(
+        context: android.content.Context,
         bean: CoffeeBean,
         dateFormat: SimpleDateFormat,
         protocol: PrintProtocol = PrintProtocol.ESC_POS
     ): Pair<ByteArray, ByteArray> {
-        val bmp = renderLabelBitmap(bean, dateFormat)
+        val bmp = renderLabelBitmap(context, bean, dateFormat)
         val out = when (protocol) {
             PrintProtocol.ESC_POS -> buildEscPosTwoPhase(bmp)
             PrintProtocol.TSPL    -> buildTsplBitmapCommands(bmp) to ByteArray(0)
@@ -73,18 +74,19 @@ object TscLabelBuilder {
 
     @Deprecated("use buildCoffeeBeanLabelPacket for two-phase send")
     fun buildCoffeeBeanLabelBytes(
+        context: android.content.Context,
         bean: CoffeeBean,
         dateFormat: SimpleDateFormat,
         protocol: PrintProtocol = PrintProtocol.ESC_POS
     ): ByteArray {
-        val (a, b) = buildCoffeeBeanLabelPacket(bean, dateFormat, protocol)
+        val (a, b) = buildCoffeeBeanLabelPacket(context, bean, dateFormat, protocol)
         val out = ByteArray(a.size + b.size)
         System.arraycopy(a, 0, out, 0, a.size)
         System.arraycopy(b, 0, out, a.size, b.size)
         return out
     }
 
-    private fun renderLabelBitmap(bean: CoffeeBean, sdf: SimpleDateFormat): Bitmap {
+    private fun renderLabelBitmap(context: android.content.Context, bean: CoffeeBean, sdf: SimpleDateFormat): Bitmap {
         val bmp = Bitmap.createBitmap(LABEL_WIDTH_DOT, LABEL_HEIGHT_DOT, Bitmap.Config.ARGB_8888)
         val canvas = Canvas(bmp)
         canvas.drawColor(Color.WHITE)
@@ -106,31 +108,31 @@ object TscLabelBuilder {
         }
 
         var y = PAD
-        val titleLayout = buildStaticLayout(bean.name.ifBlank { "咖啡豆" }, titlePaint, USABLE_W)
+        val titleLayout = buildStaticLayout(bean.name.ifBlank { context.getString(com.coffee.beantracker.R.string.roast_label_title) }, titlePaint, USABLE_W)
         drawLayoutAt(canvas, titleLayout, PAD.toFloat(), y.toFloat())
         y += titleLayout.height + 8
         canvas.drawLine(PAD.toFloat(), y.toFloat(), (LABEL_WIDTH_DOT - PAD).toFloat(), y.toFloat(), dividerPaint)
         y += 10
         val millisPerDay = TimeUnit.DAYS.toMillis(1)
-        y = drawKv(canvas, "烘焙深度:  ", resolveRoast(bean), keyPaint, valuePaint, PAD, y, USABLE_W); y += ROW_GAP
-        y = drawKv(canvas, "处理方式:  ", bean.processMethod.ifBlank { "-" }, keyPaint, valuePaint, PAD, y, USABLE_W); y += ROW_GAP
-        y = drawKv(canvas, "产地:       ", bean.origin.ifBlank { "-" }, keyPaint, valuePaint, PAD, y, USABLE_W); y += ROW_GAP
+        y = drawKv(canvas, context.getString(com.coffee.beantracker.R.string.label_roast_level), resolveRoast(context, bean), keyPaint, valuePaint, PAD, y, USABLE_W); y += ROW_GAP
+        y = drawKv(canvas, context.getString(com.coffee.beantracker.R.string.label_process), bean.processMethod.ifBlank { "-" }, keyPaint, valuePaint, PAD, y, USABLE_W); y += ROW_GAP
+        y = drawKv(canvas, context.getString(com.coffee.beantracker.R.string.label_origin), bean.origin.ifBlank { "-" }, keyPaint, valuePaint, PAD, y, USABLE_W); y += ROW_GAP
         if (bean.developmentTime.isNotBlank()) {
-            y = drawKv(canvas, "发展时间:  ", bean.developmentTime, keyPaint, valuePaint, PAD, y, USABLE_W); y += ROW_GAP
+            y = drawKv(canvas, context.getString(com.coffee.beantracker.R.string.label_development), bean.developmentTime, keyPaint, valuePaint, PAD, y, USABLE_W); y += ROW_GAP
         }
-        y = drawSection(canvas, "风味描述:  ", bean.flavorNotes.ifBlank { "-" }, keyPaint, flavorPaint, PAD, y, USABLE_W); y += SECTION_GAP
+        y = drawSection(canvas, context.getString(com.coffee.beantracker.R.string.label_flavor), bean.flavorNotes.ifBlank { "-" }, keyPaint, flavorPaint, PAD, y, USABLE_W); y += SECTION_GAP
         val roastDateStr = sdf.format(Date(bean.roastDate))
         val bestCal = Calendar.getInstance().apply { timeInMillis = bean.roastDate + bean.bestBeforeDays * millisPerDay }
         val bestDateStr = sdf.format(bestCal.time)
         val restDaysValue = bean.restDays
-        y = drawKv(canvas, "烘焙日期:  ", roastDateStr, keyPaint, valuePaint, PAD, y, USABLE_W); y += ROW_GAP
-        y = drawKv(canvas, "赏味期限:  ", bestDateStr, keyPaint, valuePaint, PAD, y, USABLE_W); y += ROW_GAP
-        y = drawKv(canvas, "养豆时间:  ", "$restDaysValue 天", keyPaint, valuePaint, PAD, y, USABLE_W)
+        y = drawKv(canvas, context.getString(com.coffee.beantracker.R.string.label_roast_date), roastDateStr, keyPaint, valuePaint, PAD, y, USABLE_W); y += ROW_GAP
+        y = drawKv(canvas, context.getString(com.coffee.beantracker.R.string.label_best_before), bestDateStr, keyPaint, valuePaint, PAD, y, USABLE_W); y += ROW_GAP
+        y = drawKv(canvas, context.getString(com.coffee.beantracker.R.string.label_rest_days), context.getString(com.coffee.beantracker.R.string.days_unit_format, "$restDaysValue"), keyPaint, valuePaint, PAD, y, USABLE_W)
         return bmp
     }
 
-    private fun resolveRoast(bean: CoffeeBean): String {
-        return try { RoastLevel.valueOf(bean.roastLevel).displayName }
+    private fun resolveRoast(context: android.content.Context, bean: CoffeeBean): String {
+        return try { RoastLevel.valueOf(bean.roastLevel).localizedName(context) }
                catch (_: Throwable) { bean.roastLevel.ifBlank { "-" } }
     }
 

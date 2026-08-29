@@ -16,9 +16,23 @@ enum class AppTheme(val id: Int, val displayName: String) {
     ROSE_PINK(4, "玫瑰粉"),
     LAVENDER_PURPLE(5, "薰衣紫");
 
+    /** 本地化名称：跟随系统语言 */
+    fun localizedName(context: android.content.Context): String {
+        val resId = when (this) {
+            PURE_WHITE -> com.coffee.beantracker.R.string.theme_pure_white
+            COFFEE_BROWN -> com.coffee.beantracker.R.string.theme_coffee_brown
+            FOREST_GREEN -> com.coffee.beantracker.R.string.theme_forest_green
+            OCEAN_BLUE -> com.coffee.beantracker.R.string.theme_ocean_blue
+            SUNSET_ORANGE -> com.coffee.beantracker.R.string.theme_sunset_orange
+            ROSE_PINK -> com.coffee.beantracker.R.string.theme_rose_pink
+            LAVENDER_PURPLE -> com.coffee.beantracker.R.string.theme_lavender_purple
+        }
+        return context.getString(resId)
+    }
+
     companion object {
         fun fromId(id: Int): AppTheme = values().firstOrNull { it.id == id } ?: PURE_WHITE
-        fun displayList(): List<Pair<Int, String>> = values().map { it.id to it.displayName }
+        fun displayList(context: android.content.Context): List<Pair<Int, String>> = values().map { it.id to it.localizedName(context) }
     }
 }
 
@@ -27,9 +41,19 @@ enum class DarkMode(val id: Int, val displayName: String) {
     LIGHT(1, "浅色模式"),
     DARK(2, "深色模式");
 
+    /** 本地化名称：跟随系统语言 */
+    fun localizedName(context: android.content.Context): String {
+        val resId = when (this) {
+            FOLLOW_SYSTEM -> com.coffee.beantracker.R.string.dark_follow_system
+            LIGHT -> com.coffee.beantracker.R.string.dark_light
+            DARK -> com.coffee.beantracker.R.string.dark_dark
+        }
+        return context.getString(resId)
+    }
+
     companion object {
         fun fromId(id: Int): DarkMode = values().firstOrNull { it.id == id } ?: FOLLOW_SYSTEM
-        fun displayList(): List<Pair<Int, String>> = values().map { it.id to it.displayName }
+        fun displayList(context: android.content.Context): List<Pair<Int, String>> = values().map { it.id to it.localizedName(context) }
     }
 }
 

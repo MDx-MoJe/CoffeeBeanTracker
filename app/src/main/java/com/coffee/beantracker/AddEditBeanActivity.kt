@@ -157,7 +157,7 @@ class AddEditBeanActivity : AppCompatActivity() {
         val cg = binding.cgRoastLevel
         cg.removeAllViews()
         RoastLevel.values().forEach { level ->
-            val chip = createChip(level.displayName, singleSelect = true)
+            val chip = createChip(level.localizedName(this), singleSelect = true)
             chip.setOnClickListener {
                 currentRoastLevel = level
                 updateRoastLevelDisplay(autoFill = true)
@@ -170,7 +170,7 @@ class AddEditBeanActivity : AppCompatActivity() {
         val cg = binding.cgRoastLevel
         for (i in 0 until cg.childCount) {
             val chip = cg.getChildAt(i) as Chip
-            if (chip.text == target.displayName) {
+            if (chip.text == target.localizedName(this)) {
                 chip.isChecked = true
                 break
             }
@@ -539,7 +539,7 @@ class AddEditBeanActivity : AppCompatActivity() {
 
     private fun updateRoastLevelDisplay(autoFill: Boolean = false) {
         // 根据烘焙深度显示建议养豆/赏味期天数
-        val hint = FlavorPeriodHelper.getSuggestionText(currentRoastLevel)
+        val hint = FlavorPeriodHelper.getSuggestionText(this, currentRoastLevel)
         binding.tvFlavorHint.text = hint
         binding.tvFlavorHint.visibility = View.VISIBLE
         // 选择烘焙度时自动填入推荐天数（仍可手动修改）
