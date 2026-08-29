@@ -22,3 +22,6 @@ signing.properties
 .DS_Store
 *.log
 .gradle/
+
+# ===== 构建产物（app/release 等）=====
+app/release/
