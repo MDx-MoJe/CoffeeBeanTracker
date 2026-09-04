@@ -50,7 +50,10 @@ CoffeeBeanTracker/
 
 ## 下载
 
-不想自己构建？直接到 [Releases](releases/) 下载 APK 安装（GitHub 与 Gitee 同步发布，国内推荐 Gitee：gitee.com/MDx-MoJe/coffee-bean-tracker/releases）。
+不想自己构建？直接下载 APK 安装（两端同步发布）：
+
+- **GitHub**：[Releases](https://github.com/MDx-MoJe/CoffeeBeanTracker/releases)
+- **Gitee（国内推荐，更快）**：[发行版](https://gitee.com/MDx-MoJe/coffee-bean-tracker/releases)
 
 ## 构建
 

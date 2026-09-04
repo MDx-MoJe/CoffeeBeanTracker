@@ -36,7 +36,10 @@ RoastCurve (烤豆) → manage curves (monitoring, design, export)
 
 ## Downloads
 
-Grab the APK from the [Releases](releases/) page (GitHub · Gitee: gitee.com/MDx-MoJe/coffee-bean-tracker/releases).
+Grab the APK from the download page (kept in sync on both platforms):
+
+- **GitHub**: [Releases](https://github.com/MDx-MoJe/CoffeeBeanTracker/releases)
+- **Gitee (faster in China)**: [发行版 / Releases](https://gitee.com/MDx-MoJe/coffee-bean-tracker/releases)
 
 ## Build
 
