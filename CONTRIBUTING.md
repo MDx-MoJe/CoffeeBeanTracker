@@ -36,7 +36,7 @@ app/src/main/java/com/coffee/beantracker/
 
 ## 姐妹项目
 
-- [烤豆 RoastCurve](https://github.com/MDx-MoJe/RoastCurve)：烘焙曲线监控与自动跟随，与本 App 通过 ContentProvider 互联。互联协议变更需两端同步发版。
+- [烤豆 RoastCurve](https://github.com/MDx-MoJe/RoastCurve)（[Gitee](https://gitee.com/MDx-MoJe/roast-curve)）：烘焙曲线监控与自动跟随，与本 App 通过 ContentProvider 互联。互联协议变更需两端同步发版。
 
 ## 许可
 

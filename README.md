@@ -6,7 +6,7 @@
 
 咖啡豆库存与冲煮记录 App：生豆批次管理、熟豆库存、做一杯扣账、烘焙消耗联动，纯本地运行。
 
-> 姐妹应用 [烤豆 RoastCurve](https://github.com/MDx-MoJe/RoastCurve)：烘焙曲线实时监控与自动跟随，两 App 通过系统级接口互联。
+> 姐妹应用 [烤豆 RoastCurve](https://github.com/MDx-MoJe/RoastCurve)（[Gitee](https://gitee.com/MDx-MoJe/roast-curve)）：烘焙曲线实时监控与自动跟随，两 App 通过系统级接口互联。
 
 ```
 豆袋 CoffeeBeanTracker → 管豆子（库存、记录、杯测）
@@ -50,7 +50,7 @@ CoffeeBeanTracker/
 
 ## 下载
 
-不想自己构建？直接到 [Releases](https://github.com/MDx-MoJe/CoffeeBeanTracker/releases) 下载 APK 安装。
+不想自己构建？直接到 [Releases](releases/) 下载 APK 安装（GitHub 与 Gitee 同步发布，国内推荐 Gitee：gitee.com/MDx-MoJe/coffee-bean-tracker/releases）。
 
 ## 构建
 

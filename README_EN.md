@@ -6,7 +6,7 @@ Coffee bean inventory & brew logging app: green bean batches, roasted stock, bre
 
 > Chinese documentation: [README.md (中文)](README.md)
 
-Sister app: [RoastCurve (烤豆)](https://github.com/MDx-MoJe/RoastCurve) — live roast curve monitoring & profile following.
+Sister app: [RoastCurve (烤豆)](https://github.com/MDx-MoJe/RoastCurve) · [Gitee](https://gitee.com/MDx-MoJe/roast-curve) — live roast curve monitoring & profile following.
 
 ```
 BeanBag   (豆袋) → manage beans (inventory, records, cupping)
@@ -36,7 +36,7 @@ RoastCurve (烤豆) → manage curves (monitoring, design, export)
 
 ## Downloads
 
-Grab the APK from the [Releases](https://github.com/MDx-MoJe/CoffeeBeanTracker/releases) page.
+Grab the APK from the [Releases](releases/) page (GitHub · Gitee: gitee.com/MDx-MoJe/coffee-bean-tracker/releases).
 
 ## Build
 
@@ -64,6 +64,6 @@ Without it, BeanBag works fully standalone.
 
 ## Support
 
-BeanBag is free, open-source and ad-free forever. If it helps, consider a [star ⭐](https://github.com/MDx-MoJe/CoffeeBeanTracker/stargazers) or [sponsoring on Afdian](https://afdian.com/a/RoastCurve). See [SPONSOR.md](SPONSOR.md).
+BeanBag is free, open-source and ad-free forever. If it helps, consider a star on [GitHub](https://github.com/MDx-MoJe/CoffeeBeanTracker/stargazers) or [Gitee](https://gitee.com/MDx-MoJe/coffee-bean-tracker), or [sponsoring on Afdian](https://afdian.com/a/RoastCurve). See [SPONSOR.md](SPONSOR.md).
 
 Copyright © 2026 MDx

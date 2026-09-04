@@ -16,7 +16,7 @@ Afdian is a creator sponsorship platform where you can make a one-time donation 
 
 - **GitHub**: starring the repo ⭐ and recommending it to coffee friends is great support
 - **Code / Issues**: open an Issue or Pull Request — see [CONTRIBUTING_EN.md](CONTRIBUTING_EN.md)
-- **Try the sister app [RoastCurve](https://github.com/MDx-MoJe/RoastCurve)**: if you roast your own beans, it's the perfect companion to BeanBag
+- **Try the sister app [RoastCurve](https://github.com/MDx-MoJe/RoastCurve) · [Gitee](https://gitee.com/MDx-MoJe/roast-curve)**: if you roast your own beans, it's the perfect companion to BeanBag
 
 ---
 

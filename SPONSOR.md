@@ -16,7 +16,7 @@
 
 - **GitHub**：给仓库点个 Star ⭐，把项目推荐给身边玩咖啡的朋友，就是很好的支持
 - **贡献代码 / 反馈问题**：欢迎提交 Issue 或 Pull Request，详见 [CONTRIBUTING.md](CONTRIBUTING.md)
-- 试试姐妹应用 [烤豆 RoastCurve](https://github.com/MDx-MoJe/RoastCurve)：如果你自己烘豆，它就是豆袋的完美搭档
+- 试试姐妹应用 [烤豆 RoastCurve](https://github.com/MDx-MoJe/RoastCurve)（[Gitee](https://gitee.com/MDx-MoJe/roast-curve)）：如果你自己烘豆，它就是豆袋的完美搭档
 
 ---
 

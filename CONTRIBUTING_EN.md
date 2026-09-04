@@ -36,7 +36,7 @@ Requirements: JDK 17+, Android SDK 34.
 
 ## Sister Project
 
-- [RoastCurve (烤豆)](https://github.com/MDx-MoJe/RoastCurve): live roast curve monitoring & profile following, linked to this app via ContentProvider. Protocol changes must be released on both sides in sync.
+- [RoastCurve (烤豆)](https://github.com/MDx-MoJe/RoastCurve) · [Gitee](https://gitee.com/MDx-MoJe/roast-curve): live roast curve monitoring & profile following, linked to this app via ContentProvider. Protocol changes must be released on both sides in sync.
 
 ## License
 
